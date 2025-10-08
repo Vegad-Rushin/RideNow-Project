@@ -1,0 +1,257 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="login.master.cs" Inherits="RideNow.login" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+
+                <!DOCTYPE html>
+                <html lang="en" class="no-js">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                    <title>RideNow - Log in</title>
+                    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+                    <link rel="stylesheet" href="css/bootstrap.css">
+                    <link rel="stylesheet" href="css/font-awesome.min.css">
+                    <link rel="stylesheet" href="css/main.css">
+                    <link rel="stylesheet" href="css/intro.css">
+                    <link rel="stylesheet" href="css/auth.css">
+                </head>
+                <body class="login-page">
+                    <header id="header">
+                        <div class="main-menu">
+                            <div class="header-content">
+                                <a href="index.html" class="logo-text">RideNow</a>
+                                <nav id="nav-menu-container">
+                                    <ul class="nav-menu">
+                                        <li><a href="index.html">Home</a></li>
+                                        <li><a href="about.html">About</a></li>
+                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="register.html" class="signup-btn">Sign up</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </header>
+
+                    <main class="auth-wrapper">
+                        <div class="auth-background">
+                            <div class="auth-overlay"></div>
+                        </div>
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-5 col-md-7">
+                                    <section class="auth-card scroll-animate-scale">
+                                        <div class="auth-header">
+                                            <h1 class="auth-title">Welcome back</h1>
+                                            <p class="auth-subtitle">Log in with your email or phone to continue</p>
+                                        </div>
+                                        <form class="auth-form" id="loginForm" action="#" method="post" novalidate>
+                                            <div class="form-group">
+                                                <label for="login-identifier">Email or phone</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                                    </div>
+                                                    <input id="login-identifier" name="identifier" type="text" class="form-control" placeholder="you@example.com or +1 555 000 0000" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="login-password">Password</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                                                    </div>
+                                                    <input id="login-password" name="password" type="password" class="form-control" placeholder="Enter password" minlength="6" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-row between">
+                                                <label class="checkbox">
+                                                    <input type="checkbox" name="remember">
+                                                    <span>Remember me</span>
+                                                </label>
+                                                <a class="link-small" href="#">Forgot password?</a>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary btn-block">
+                                                <i class="fa fa-sign-in"></i>Log in
+                                            </button>
+                                        </form>
+                                        <div class="auth-divider">
+                                            <span>or</span>
+                                        </div>
+                                        <div class="social-login">
+                                            <button class="btn btn-social btn-google">
+                                                <i class="fa fa-google"></i>Continue with Google
+                                            </button>
+                                            <button class="btn btn-social btn-facebook">
+                                                <i class="fa fa-facebook"></i>Continue with Facebook
+                                            </button>
+                                        </div>
+                                        <div class="auth-alt">
+                                            <span>New to RideNow?</span> <a href="register.html" class="link-inline">Create an account</a>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+
+                    <!-- Coming Soon Modal -->
+                    <div class="coming-soon-modal" id="comingSoonModal">
+                        <div class="coming-soon-content">
+                            <div class="coming-soon-icon">
+                                <i class="fa fa-rocket"></i>
+                            </div>
+                            <h3 class="coming-soon-title">Coming Soon!</h3>
+                            <p class="coming-soon-message">This feature is currently under development. We're working hard to bring you an amazing experience. Stay tuned!</p>
+                            <button class="coming-soon-close" onclick="closeComingSoon()">Got it!</button>
+                        </div>
+                    </div>
+
+                    <script src="js/vendor/jquery-2.2.4.min.js"></script>
+                    <script src="js/vendor/bootstrap.min.js"></script>
+
+                    <script>
+                        $(document).ready(function () {
+                            // Scroll Animation Observer
+                            const observerOptions = {
+                                threshold: 0.1,
+                                rootMargin: '0px 0px -50px 0px'
+                            };
+
+                            const observer = new IntersectionObserver(function (entries) {
+                                entries.forEach(entry => {
+                                    if (entry.isIntersecting) {
+                                        entry.target.classList.add('animate');
+                                    }
+                                });
+                            }, observerOptions);
+
+                            // Observe all scroll animate elements
+                            document.querySelectorAll('.scroll-animate, .scroll-animate-left, .scroll-animate-right, .scroll-animate-scale, .scroll-animate-rotate').forEach(el => {
+                                observer.observe(el);
+                            });
+
+                            // Login form validation
+                            $('#loginForm').on('submit', function (e) {
+                                e.preventDefault();
+
+                                let isValid = true;
+                                $('.auth-form .form-control[required]').each(function () {
+                                    if (!validateAuthField($(this))) {
+                                        isValid = false;
+                                    }
+                                });
+
+                                if (isValid) {
+                                    // Show success message
+                                    $('.btn-primary').html('<i class="fa fa-spinner fa-spin"></i> Signing in...');
+                                    $('.btn-primary').prop('disabled', true);
+
+                                    setTimeout(function () {
+                                        $('.btn-primary').html('<i class="fa fa-check"></i> Success!');
+                                        $('.btn-primary').removeClass('btn-primary').addClass('btn-success');
+
+                                        // Redirect to dashboard after success
+                                        setTimeout(function () {
+                                            window.location.href = 'user-dashboard.html';
+                                        }, 1500);
+                                    }, 2000);
+                                }
+                            });
+
+                            // Real-time validation
+                            $('.auth-form .form-control').on('blur input', function () {
+                                validateAuthField($(this));
+                            });
+
+                            // Coming soon functionality for buttons
+                            $('a[href="#"], button:not(.coming-soon-close):not(.btn-primary)').on('click', function (e) {
+                                e.preventDefault();
+                                showComingSoon();
+                            });
+                        });
+
+                        // Auth form validation function
+                        function validateAuthField(field) {
+                            const value = field.val().trim();
+                            const fieldName = field.attr('name');
+                            let isValid = true;
+                            let errorMessage = '';
+
+                            // Remove previous error states
+                            field.removeClass('error success');
+                            field.closest('.form-group').removeClass('has-error');
+                            field.siblings('.form-error').remove();
+
+                            // Required field validation
+                            if (field.prop('required') && value === '') {
+                                isValid = false;
+                                errorMessage = 'This field is required';
+                            }
+
+                            // Email validation
+                            if (fieldName === 'identifier' && value !== '') {
+                                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+                                if (!emailRegex.test(value) && !phoneRegex.test(value.replace(/\s/g, ''))) {
+                                    isValid = false;
+                                    errorMessage = 'Please enter a valid email or phone number';
+                                }
+                            }
+
+                            // Password validation
+                            if (fieldName === 'password' && value !== '') {
+                                if (value.length < 6) {
+                                    isValid = false;
+                                    errorMessage = 'Password must be at least 6 characters long';
+                                }
+                            }
+
+                            // Set field state
+                            if (isValid) {
+                                field.addClass('success');
+                            } else {
+                                field.addClass('error');
+                                field.closest('.form-group').addClass('has-error');
+                                field.after(`<div class="form-error">${errorMessage}</div>`);
+                            }
+
+                            return isValid;
+                        }
+
+                        // Coming Soon Modal Functions
+                        function showComingSoon() {
+                            $('#comingSoonModal').css('display', 'flex');
+                            $('body').css('overflow', 'hidden');
+                        }
+
+                        function closeComingSoon() {
+                            $('#comingSoonModal').css('display', 'none');
+                            $('body').css('overflow', 'auto');
+                        }
+
+                        // Close modal when clicking outside
+                        $(document).on('click', '.coming-soon-modal', function (e) {
+                            if (e.target === this) {
+                                closeComingSoon();
+                            }
+                        });
+                    </script>
+                </body>
+                </html>
+
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>

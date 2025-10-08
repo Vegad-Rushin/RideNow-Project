@@ -1,0 +1,1182 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/editProfile.Master" AutoEventWireup="true" CodeBehind="editProfile.aspx.cs" Inherits="RideNow.editProfile1" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" runat="server" contentplaceholderid="ContentPlaceHolder1">
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Edit Profile - RideNow</title>
+                    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+                    <style>
+
+                        /* RideNow Dashboard Styles */
+                        * {
+                            margin: 0;
+                            padding: 0;
+                            box-sizing: border-box;
+                        }
+
+                        :root {
+                            --primary-color: #667eea;
+                            --secondary-color: #764ba2;
+                            --accent-color: #f093fb;
+                            --text-primary: #2d3748;
+                            --text-secondary: #4a5568;
+                            --text-muted: #718096;
+                            --bg-primary: #f7fafc;
+                            --bg-secondary: #edf2f7;
+                            --bg-card: rgba(255, 255, 255, 0.95);
+                            --bg-card-hover: rgba(255, 255, 255, 0.98);
+                            --border-color: rgba(255, 255, 255, 0.18);
+                            --shadow-light: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+                            --shadow-hover: 0 15px 35px 0 rgba(31, 38, 135, 0.5);
+                            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                            --gradient-bg: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+                            --success-color: #48bb78;
+                            --error-color: #e53e3e;
+                            --warning-color: #ed8936;
+                        }
+
+                        body {
+                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                            line-height: 1.6;
+                            color: var(--text-primary);
+                            background: var(--gradient-bg);
+                            background-attachment: fixed;
+                            min-height: 100vh;
+                            transition: all 0.3s ease;
+                        }
+
+                        /* Navigation */
+                        .navbar {
+                            position: fixed;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            z-index: 1000;
+                            background: #000;
+                            border-bottom: 1px solid #333;
+                            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                        }
+
+                        .nav-container {
+                            max-width: 1200px;
+                            margin: 0 auto;
+                            padding: 0 20px;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            height: 70px;
+                        }
+
+                        .nav-logo {
+                            color: white;
+                            font-size: 1.8rem;
+                            font-weight: bold;
+                            text-decoration: none;
+                        }
+
+                        .nav-menu {
+                            display: flex;
+                            list-style: none;
+                            gap: 30px;
+                        }
+
+                        .nav-link {
+                            text-decoration: none;
+                            color: white;
+                            font-weight: 500;
+                            padding: 10px 15px;
+                            border-radius: 8px;
+                            transition: all 0.3s ease;
+                        }
+
+                            .nav-link:hover,
+                            .nav-link.active {
+                                color: #667eea;
+                                background: rgba(255, 255, 255, 0.1);
+                            }
+
+                            .nav-link.dashboard {
+                                text-decoration: underline;
+                                color: #667eea;
+                            }
+
+                        /* Mobile Menu */
+                        .hamburger {
+                            display: none;
+                            flex-direction: column;
+                            cursor: pointer;
+                        }
+
+                        .bar {
+                            width: 25px;
+                            height: 3px;
+                            background: white;
+                            margin: 3px 0;
+                            transition: 0.3s;
+                            border-radius: 2px;
+                        }
+
+                        /* Main Content */
+                        .main-content {
+                            margin-top: 70px;
+                            min-height: calc(100vh - 70px);
+                            padding: 40px 20px;
+                        }
+
+                        .container {
+                            max-width: 800px;
+                            margin: 0 auto;
+                        }
+
+                        /* Profile Header */
+                        .profile-header {
+                            background: var(--bg-card);
+                            backdrop-filter: blur(10px);
+                            border: 1px solid var(--border-color);
+                            border-radius: 20px;
+                            padding: 40px;
+                            margin-bottom: 30px;
+                            box-shadow: var(--shadow-light);
+                            text-align: center;
+                        }
+
+                            .profile-header h1 {
+                                font-size: 2.5rem;
+                                margin-bottom: 10px;
+                                background: var(--gradient-primary);
+                                -webkit-background-clip: text;
+                                -webkit-text-fill-color: transparent;
+                                background-clip: text;
+                            }
+
+                            .profile-header p {
+                                color: var(--text-secondary);
+                                font-size: 1.1rem;
+                            }
+
+                        /* Profile Card */
+                        .profile-card {
+                            background: var(--bg-card);
+                            backdrop-filter: blur(10px);
+                            border: 1px solid var(--border-color);
+                            border-radius: 20px;
+                            padding: 40px;
+                            box-shadow: var(--shadow-light);
+                            transition: all 0.3s ease;
+                        }
+
+                            .profile-card:hover {
+                                box-shadow: var(--shadow-hover);
+                                transform: translateY(-5px);
+                            }
+
+                        /* Avatar Section */
+                        .avatar-section {
+                            text-align: center;
+                            margin-bottom: 40px;
+                        }
+
+                        .avatar-container {
+                            position: relative;
+                            display: inline-block;
+                        }
+
+                        .avatar {
+                            width: 120px;
+                            height: 120px;
+                            border-radius: 50%;
+                            background: var(--gradient-primary);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            color: white;
+                            font-size: 3rem;
+                            margin: 0 auto 20px;
+                            border: 4px solid white;
+                            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+                            transition: all 0.3s ease;
+                        }
+
+                            .avatar:hover {
+                                transform: scale(1.05);
+                            }
+
+                            .avatar img {
+                                width: 100%;
+                                height: 100%;
+                                border-radius: 50%;
+                                object-fit: cover;
+                            }
+
+                        .avatar-upload {
+                            position: absolute;
+                            bottom: 5px;
+                            right: 5px;
+                            background: var(--gradient-primary);
+                            border: none;
+                            border-radius: 50%;
+                            width: 35px;
+                            height: 35px;
+                            color: white;
+                            cursor: pointer;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+                            transition: all 0.3s ease;
+                        }
+
+                            .avatar-upload:hover {
+                                transform: scale(1.1);
+                            }
+
+                            .avatar-upload input[type="file"] {
+                                display: none;
+                            }
+
+                        .member-badge {
+                            background: var(--gradient-primary);
+                            color: white;
+                            padding: 8px 20px;
+                            border-radius: 20px;
+                            font-size: 0.9rem;
+                            font-weight: 500;
+                            display: inline-block;
+                            margin-top: 10px;
+                        }
+
+                        /* Form Styles */
+                        .form-grid {
+                            display: flex;
+                            gap: 30px;
+                            margin-bottom: 30px;
+                        }
+
+                        .form-group {
+                            margin-bottom: 25px;
+                        }
+
+                            .form-group.full-width {
+                                grid-column: 1 / -1;
+                            }
+
+                        .form-label {
+                            display: flex;
+                            width:100%;
+                            margin-bottom: 8px;
+                            font-weight: 600;
+                            color: var(--text-primary);
+                            font-size: 0.95rem;
+                        }
+
+                            .form-label.required::after {
+                                content: " *";
+                                color: var(--error-color);
+                            }
+
+                        .form-input {
+                            width: 100%;
+                            padding: 15px 20px;
+                            border: 2px solid #e2e8f0;
+                            border-radius: 12px;
+                            background: rgba(255, 255, 255, 0.9);
+                            color: var(--text-primary);
+                            font-size: 1rem;
+                            transition: all 0.3s ease;
+                        }
+
+                            .form-input:focus {
+                                outline: none;
+                                border-color: var(--primary-color);
+                                box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+                                background: white;
+                            }
+
+                            .form-input:invalid {
+                                border-color: var(--error-color);
+                            }
+
+                            .form-input::placeholder {
+                                color: var(--text-muted);
+                            }
+
+                        .form-textarea {
+                            width: 100%;
+                            padding: 15px 20px;
+                            border: 2px solid #e2e8f0;
+                            border-radius: 12px;
+                            background: rgba(255, 255, 255, 0.9);
+                            color: var(--text-primary);
+                            font-size: 1rem;
+                            resize: vertical;
+                            min-height: 120px;
+                            transition: all 0.3s ease;
+                            font-family: inherit;
+                        }
+
+                            .form-textarea:focus {
+                                outline: none;
+                                border-color: var(--primary-color);
+                                box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+                                background: white;
+                            }
+
+                        .form-select {
+                            width: 100%;
+                            padding: 15px 20px;
+                            border: 2px solid #e2e8f0;
+                            border-radius: 12px;
+                            background: rgba(255, 255, 255, 0.9);
+                            color: var(--text-primary);
+                            font-size: 1rem;
+                            transition: all 0.3s ease;
+                        }
+
+                            .form-select:focus {
+                                outline: none;
+                                border-color: var(--primary-color);
+                                box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+                                background: white;
+                            }
+
+                        /* Action Buttons */
+                        .action-buttons {
+                            display: flex;
+                            gap: 20px;
+                            justify-content: center;
+                            margin-top: 40px;
+                        }
+
+                        .btn {
+                            padding: 15px 30px;
+                            border: none;
+                            border-radius: 12px;
+                            font-size: 1rem;
+                            font-weight: 600;
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                            text-decoration: none;
+                            min-width: 140px;
+                            justify-content: center;
+                        }
+
+                        .btn-primary {
+                            background: var(--gradient-primary);
+                            color: white;
+                            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+                        }
+
+                            .btn-primary:hover {
+                                transform: translateY(-2px);
+                                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+                            }
+
+                            .btn-primary:disabled {
+                                opacity: 0.6;
+                                cursor: not-allowed;
+                                transform: none;
+                            }
+
+                        .btn-secondary {
+                            background: transparent;
+                            color: var(--text-primary);
+                            border: 2px solid #e2e8f0;
+                        }
+
+                            .btn-secondary:hover {
+                                background: #f8fafc;
+                                border-color: var(--primary-color);
+                                transform: translateY(-2px);
+                            }
+
+                        .btn-danger {
+                            background: var(--error-color);
+                            color: white;
+                            box-shadow: 0 4px 15px rgba(229, 62, 62, 0.3);
+                        }
+
+                            .btn-danger:hover {
+                                transform: translateY(-2px);
+                                box-shadow: 0 8px 25px rgba(229, 62, 62, 0.4);
+                            }
+
+                        /* Contact Info Section */
+                        .contact-info {
+                            margin-top: 30px;
+                            padding-top: 30px;
+                            border-top: 2px solid #e2e8f0;
+                        }
+
+                            .contact-info h3 {
+                                margin-bottom: 20px;
+                                color: var(--text-primary);
+                                font-size: 1.3rem;
+                                display: flex;
+                                align-items: center;
+                                gap: 10px;
+                            }
+
+                        .contact-item {
+                            display: flex;
+                            align-items: center;
+                            gap: 15px;
+                            margin-bottom: 15px;
+                            padding: 15px;
+                            background: rgba(102, 126, 234, 0.05);
+                            border-radius: 10px;
+                            transition: all 0.3s ease;
+                        }
+
+                            .contact-item:hover {
+                                background: rgba(102, 126, 234, 0.1);
+                                transform: translateX(5px);
+                            }
+
+                        .contact-icon {
+                            width: 40px;
+                            height: 40px;
+                            background: var(--gradient-primary);
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            color: white;
+                            font-size: 1.1rem;
+                        }
+
+                        .contact-details h4 {
+                            margin-bottom: 5px;
+                            color: var(--text-primary);
+                        }
+
+                        .contact-details p {
+                            color: var(--text-secondary);
+                            font-size: 0.9rem;
+                        }
+
+                        /* Loading Spinner */
+                        .loading-spinner {
+                            display: none;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 10px;
+                            color: var(--text-primary);
+                        }
+
+                        .spinner {
+                            width: 20px;
+                            height: 20px;
+                            border: 2px solid #e2e8f0;
+                            border-top: 2px solid var(--primary-color);
+                            border-radius: 50%;
+                            animation: spin 1s linear infinite;
+                        }
+
+                        @keyframes spin {
+                            0% {
+                                transform: rotate(0deg);
+                            }
+
+                            100% {
+                                transform: rotate(360deg);
+                            }
+                        }
+
+                        /* Messages */
+                        .message {
+                            padding: 15px 20px;
+                            border-radius: 10px;
+                            margin-bottom: 20px;
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                        }
+
+                            .message.success {
+                                background: rgba(72, 187, 120, 0.1);
+                                border: 1px solid var(--success-color);
+                                color: var(--success-color);
+                            }
+
+                            .message.error {
+                                background: rgba(229, 62, 62, 0.1);
+                                border: 1px solid var(--error-color);
+                                color: var(--error-color);
+                            }
+
+                            .message.warning {
+                                background: rgba(237, 137, 54, 0.1);
+                                border: 1px solid var(--warning-color);
+                                color: var(--warning-color);
+                            }
+
+                        /* Modal */
+                        .modal {
+                            display: none;
+                            position: fixed;
+                            z-index: 2000;
+                            left: 0;
+                            top: 0;
+                            width: 100%;
+                            height: 100%;
+                            background-color: rgba(0, 0, 0, 0.5);
+                            backdrop-filter: blur(5px);
+                        }
+
+                        .modal-content {
+                            background: var(--bg-card);
+                            margin: 15% auto;
+                            padding: 30px;
+                            border-radius: 20px;
+                            width: 90%;
+                            max-width: 400px;
+                            text-align: center;
+                            box-shadow: var(--shadow-hover);
+                        }
+
+                        .modal h3 {
+                            margin-bottom: 20px;
+                            color: var(--text-primary);
+                        }
+
+                        .modal-buttons {
+                            display: flex;
+                            gap: 15px;
+                            justify-content: center;
+                            margin-top: 25px;
+                        }
+
+                        /* Responsive Design */
+                        @media (max-width: 768px) {
+                            .nav-menu {
+                                position: fixed;
+                                left: -100%;
+                                top: 70px;
+                                flex-direction: column;
+                                background: #000;
+                                width: 100%;
+                                text-align: center;
+                                transition: 0.3s;
+                                padding: 20px 0;
+                                gap: 0;
+                            }
+
+                                .nav-menu.active {
+                                    left: 0;
+                                }
+
+                            .hamburger {
+                                display: flex;
+                            }
+
+                                .hamburger.active .bar:nth-child(2) {
+                                    opacity: 0;
+                                }
+
+                                .hamburger.active .bar:nth-child(1) {
+                                    transform: translateY(8px) rotate(45deg);
+                                }
+
+                                .hamburger.active .bar:nth-child(3) {
+                                    transform: translateY(-8px) rotate(-45deg);
+                                }
+
+                            .form-grid {
+                                grid-template-columns: 1fr;
+                                gap: 20px;
+                            }
+
+                            .action-buttons {
+                                flex-direction: column;
+                                align-items: center;
+                            }
+
+                            .btn {
+                                width: 100%;
+                                max-width: 300px;
+                            }
+
+                            .modal-content {
+                                margin: 25% auto;
+                                width: 95%;
+                                padding: 20px;
+                            }
+                        }
+
+                        @media (max-width: 480px) {
+                            .container {
+                                padding: 0 15px;
+                            }
+
+                            .profile-header,
+                            .profile-card {
+                                padding: 25px;
+                            }
+
+                            .avatar {
+                                width: 100px;
+                                height: 100px;
+                                font-size: 2.5rem;
+                            }
+
+                            .profile-header h1 {
+                                font-size: 2rem;
+                            }
+
+                            .modal-buttons {
+                                flex-direction: column;
+                            }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <!-- Navigation -->
+                    <%--<nav class="navbar">
+                        <div class="nav-container">
+                            <a href="#" class="nav-logo">RideNow</a>
+                            <ul class="nav-menu" id="navMenu">
+                                <li><a href="index.aspx" class="nav-link">HOME</a></li>
+                                <li><a href="about.aspx" class="nav-link">ABOUT</a></li>
+                                <li><a href="contact.aspx" class="nav-link">CONTACT</a></li>
+                                <li><a href="user-dashboard.aspx" class="nav-link dashboard">DASHBOARD</a></li>
+                                <li><a href="logout.aspx" class="nav-link">LOGOUT</a></li>
+                            </ul>
+                            <div class="hamburger" id="hamburger">
+                                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+                            </div>
+                        </div>
+                    </nav>--%>
+
+                    <!-- Main Content -->
+                    <main class="main-content">
+                    <div class="container" style="position:absolute; top:30px; left:27%;">
+                            <!-- Profile Header -->
+                            <div class="profile-header">
+                                <h1>Edit Profile</h1>
+                                <p>
+                                    Update your personal information and preferences
+                                </p>
+                        </div>
+
+                            <div style="text-align: center; margin-bottom: 20px; margin-top: 20px;">
+                                <a href="user-dashboard.aspx" class="btn btn-secondary" style="background: transparent; color: var(--primary-color); border-color: var(--primary-color);">
+                                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                                </a>
+                            </div>
+
+                            <div id="messages">
+                                <asp:Literal ID="ltMessage" runat="server"></asp:Literal>
+                            </div>
+
+                            <!-- Profile Card -->
+                            <div class="profile-card">
+                                <!-- Avatar Section -->
+                                <div class="avatar-section">
+                                    <div class="avatar-container">
+                                        <div class="avatar" id="avatar">
+                                            <i class="fas fa-user"></i>
+                                        </div>
+                                        <button class="avatar-upload" type="button" onclick="document.getElementById('avatarInput').click()">
+                                            <i class="fas fa-camera"></i>
+                                            <input type="file" id="avatarInput" accept="image/*" style="display: none;">
+                                        </button>
+                                    </div>
+                                    <div class="member-badge">
+                                        Gold Member
+                                    </div>
+                                </div>
+
+                                <!-- Profile Form -->
+                                <form id="profileForm">
+                                    <div class="form-grid">
+                                        <div class="form-group">
+                                            <label class="form-label required" for="firstName">
+                                            First Name</label>
+                                            <input type="text" id="firstName" name="firstName" class="form-input" placeholder="Enter your first name"  required>
+                                        </div>
+                                       <%-- <div class="form-group">
+                                            <label class="form-label required" for="lastName">
+                                            Last Name</label>
+                                            <input type="text" id="lastName" name="lastName" class="form-input" placeholder="Enter your last name" value="Patel" required>
+                                        </div>--%>
+                                        <div class="form-group">
+                                            <label class="form-label required" for="email">
+                                            Email Address</label>
+                                            <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email"  required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label required" for="phone">
+                                            Phone Number</label>
+                                            <input type="tel" id="phone" name="phone" class="form-input" placeholder="Enter your phone number"  required>
+                                        </div>
+                                        <%--<div class="form-group">
+                        <label class="form-label" for="address">
+                        Address</label>
+                        <input type="text" id="address" name="address" class="form-input" placeholder="Enter your address" value="123 Main Street">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="city">
+                        City</label>
+                        <input type="text" id="city" name="city" class="form-input" placeholder="Enter your city" value="New York">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="state">
+                        State</label>
+                        <select id="state" name="state" class="form-select">
+                            <option value="">Select State</option>
+                            <option value="NY" selected>New York</option>
+                            <option value="CA">California</option>
+                            <option value="TX">Texas</option>
+                            <option value="FL">Florida</option>
+                            <option value="IL">Illinois</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="zipCode">
+                        ZIP Code</label>
+                        <input type="text" id="zipCode" name="zipCode" class="form-input" placeholder="Enter ZIP code" value="10001">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="memberLevel">
+                        Member Level</label>
+                        <select id="memberLevel" name="memberLevel" class="form-select">
+                            <option value="bronze">Bronze</option>
+                            <option value="silver">Silver</option>
+                            <option value="gold" selected>Gold</option>
+                            <option value="platinum">Platinum</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="preferredLanguage">
+                        Preferred Language</label>
+                        <select id="preferredLanguage" name="preferredLanguage" class="form-select">
+                            <option value="en" selected>English</option>
+                            <option value="es">Spanish</option>
+                            <option value="fr">French</option>
+                            <option value="de">German</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label class="form-label" for="bio">
+                        Bio</label>
+                        <textarea id="bio" name="bio" class="form-textarea" placeholder="Tell us about yourself...">Frequent traveler who loves exploring new cities with RideNow. Always looking for the best routes and reliable rides.</textarea>
+                    </div> --%>
+                                    </div>
+
+                                    <!-- Contact Information Display -->
+                                    <div class="contact-info">
+                                        <h3><i class="fas fa-phone"></i>Contact Information</h3>
+                                        <div class="contact-item">
+                                            <div class="contact-icon">
+                                                <i class="fas fa-phone"></i>
+                                            </div>
+                                            <div class="contact-details">
+                                                <h4>Phone Number</h4>
+                                                <p id="displayPhone">
+                                                    +1 555 000 0000
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="contact-item">
+                                            <div class="contact-icon">
+                                                <i class="fas fa-envelope"></i>
+                                            </div>
+                                            <div class="contact-details">
+                                                <h4>Email Address</h4>
+                                                <p id="displayEmail">
+                                                    jenil@example.com
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <%--<div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Location</h4>
+                            <p id="displayLocation">
+                                New York, NY</p>
+                        </div>
+                    </div>--%>
+                                    </div>
+
+                                    <!-- Action Buttons -->
+                                    <div class="action-buttons">
+                                        <button type="submit" class="btn btn-primary" id="saveBtn">
+                                            <i class="fas fa-save"></i><span>Save Changes</span>
+                                            <div class="loading-spinner" id="saveSpinner">
+                                                <div class="spinner">
+                                                </div>
+                                                <span>Saving...</span>
+                                            </div>
+                                        </button>
+                                        <button type="button" class="btn btn-secondary" id="cancelBtn">
+                                            <i class="fas fa-times"></i>Cancel
+                                        </button>
+                                        <button type="button" class="btn btn-danger" id="deleteBtn">
+                                            <i class="fas fa-trash"></i>Delete Account
+                                        </button>
+                                    </div>
+                                </form>
+                        </div>
+                    </div>
+                    </main>
+
+                    <!-- Confirmation Modal -->
+                    <div id="confirmModal" class="modal">
+                        <div class="modal-content">
+                            <h3 id="modalTitle">Confirm Action</h3>
+                            <p id="modalMessage">
+                                Are you sure you want to perform this action?
+                            </p>
+                            <div class="modal-buttons">
+                                <button class="btn btn-primary" id="confirmBtn">
+                                    Yes
+                                </button>
+                                <button class="btn btn-secondary" id="cancelModalBtn">
+                                    No
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+    // DOM Elements
+                               const profileForm = document.getElementById('profileForm');
+                               const avatarInput = document.getElementById('avatarInput');
+                               const avatar = document.getElementById('avatar');
+                               const saveBtn = document.getElementById('saveBtn');
+                               const cancelBtn = document.getElementById('cancelBtn');
+                               const deleteBtn = document.getElementById('deleteBtn');
+                               const hamburger = document.getElementById('hamburger');
+                               const navMenu = document.getElementById('navMenu');
+                               const messages = document.getElementById('messages');
+                               const confirmModal = document.getElementById('confirmModal');
+                               const modalTitle = document.getElementById('modalTitle');
+                               const modalMessage = document.getElementById('modalMessage');
+                               const confirmBtn = document.getElementById('confirmBtn');
+                               const cancelModalBtn = document.getElementById('cancelModalBtn');
+                               const saveSpinner = document.getElementById('saveSpinner');
+
+                               // Form elements for live updates
+                               const phoneInput = document.getElementById('phone');
+                               const emailInput = document.getElementById('email');
+                               const cityInput = document.getElementById('city');
+                               const stateInput = document.getElementById('state');
+                               const displayPhone = document.getElementById('displayPhone');
+                               const displayEmail = document.getElementById('displayEmail');
+                               const displayLocation = document.getElementById('displayLocation');
+
+                               // Initialize app
+                               document.addEventListener('DOMContentLoaded', function () {
+                                   initializeApp();
+                               });
+
+                               function initializeApp() {
+                                   setupEventListeners();
+                                   setupLiveUpdates();
+                                   loadUserData();
+                               }
+
+                               function setupEventListeners() {
+                                   // Mobile menu
+                                   hamburger.addEventListener('click', toggleMobileMenu);
+
+                                   // Avatar upload
+                                   avatarInput.addEventListener('change', handleAvatarUpload);
+
+                                   // Form submission
+                                   profileForm.addEventListener('submit', handleFormSubmit);
+
+                                   // Cancel button
+                                   cancelBtn.addEventListener('click', handleCancel);
+
+                                   // Delete button
+                                   deleteBtn.addEventListener('click', handleDeleteAccount);
+
+                                   // Modal buttons
+                                   confirmBtn.addEventListener('click', confirmAction);
+                                   cancelModalBtn.addEventListener('click', closeModal);
+
+                                   // Close modal when clicking outside
+                                   confirmModal.addEventListener('click', function (e) {
+                                       if (e.target === confirmModal) {
+                                           closeModal();
+                                       }
+                                   });
+
+                                   // Escape key to close modal
+                                   document.addEventListener('keydown', function (e) {
+                                       if (e.key === 'Escape' && confirmModal.style.display === 'block') {
+                                           closeModal();
+                                       }
+                                   });
+                               }
+
+                               function setupLiveUpdates() {
+                                   // Update display values as user types
+                                   phoneInput.addEventListener('input', function () {
+                                       displayPhone.textContent = this.value || 'Not provided';
+                                   });
+
+                                   emailInput.addEventListener('input', function () {
+                                       displayEmail.textContent = this.value || 'Not provided';
+                                   });
+
+                                   cityInput.addEventListener('input', updateLocation);
+                                   stateInput.addEventListener('change', updateLocation);
+                               }
+
+                               function updateLocation() {
+                                   const city = cityInput.value || 'City';
+                                   const state = stateInput.value || 'State';
+                                   displayLocation.textContent = `${city}, ${state}`;
+                               }
+
+                               function toggleMobileMenu() {
+                                   hamburger.classList.toggle('active');
+                                   navMenu.classList.toggle('active');
+                               }
+
+                               function handleAvatarUpload(event) {
+                                   const file = event.target.files[0];
+                                   if (file) {
+                                       // Validate file type
+                                       if (!file.type.startsWith('image/')) {
+                                           showMessage('Please select a valid image file.', 'error');
+                                           return;
+                                       }
+
+                                       // Validate file size (max 5MB)
+                                       if (file.size > 5 * 1024 * 1024) {
+                                           showMessage('Image size must be less than 5MB.', 'error');
+                                           return;
+                                       }
+
+                                       const reader = new FileReader();
+                                       reader.onload = function (e) {
+                                           avatar.innerHTML = `<img src="${e.target.result}" alt="Profile Picture">`;
+                                           showMessage('Avatar updated successfully!', 'success');
+                                       };
+                                       reader.readAsDataURL(file);
+                                   }
+                               }
+
+                               function handleFormSubmit(event) {
+                                   /*event.preventDefault();*/
+
+                                   // Validate form
+                                   if (!validateForm()) {
+                                       return;
+                                   }
+
+                                   // Show loading state
+                                   showLoading(true);
+
+                                   // Simulate API call
+                                   setTimeout(() => {
+                                       const formData = new FormData(profileForm);
+                                       const userData = Object.fromEntries(formData.entries());
+
+                                       // Save to localStorage (in real app, this would be an API call)
+                                       localStorage.setItem('userProfile', JSON.stringify(userData));
+
+                                       showLoading(false);
+                                       showMessage('Profile updated successfully!', 'success');
+
+                                       // Update display values
+                                       updateDisplayValues(userData);
+
+                                   }, 2000);
+                               }
+
+                               function validateForm() {
+                                   const requiredFields = ['firstName', 'lastName', 'email', 'phone'];
+                                   let isValid = true;
+
+                                   requiredFields.forEach(fieldName => {
+                                       const field = document.getElementById(fieldName);
+                                       if (!field.value.trim()) {
+                                           field.style.borderColor = 'var(--error-color)';
+                                           isValid = false;
+                                       } else {
+                                           field.style.borderColor = '#e2e8f0';
+                                       }
+                                   });
+
+                                   // Email validation
+                                   const email = document.getElementById('email');
+                                   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                   if (email.value && !emailRegex.test(email.value)) {
+                                       email.style.borderColor = 'var(--error-color)';
+                                       showMessage('Please enter a valid email address.', 'error');
+                                       isValid = false;
+                                   }
+
+                                   if (!isValid) {
+                                       showMessage('Please fill in all required fields correctly.', 'error');
+                                   }
+
+                                   return isValid;
+                               }
+
+                               function handleCancel() {
+                                   showConfirmModal(
+                                       'Cancel Changes',
+                                       'Are you sure you want to cancel? Any unsaved changes will be lost.',
+                                       () => {
+                                           resetForm();
+                                           closeModal();
+                                       }
+                                   );
+                               }
+
+                               function handleDeleteAccount() {
+                                   showConfirmModal(
+                                       'Delete Account',
+                                       'Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently removed.',
+                                       () => {
+                                           // Simulate account deletion
+                                           showLoading(true);
+                                           setTimeout(() => {
+                                               showLoading(false);
+                                               showMessage('Account deletion initiated. You will receive a confirmation email shortly.', 'warning');
+                                               closeModal();
+                                           }, 2000);
+                                       }
+                                   );
+                               }
+
+                               function showConfirmModal(title, message, onConfirm) {
+                                   modalTitle.textContent = title;
+                                   modalMessage.textContent = message;
+                                   confirmModal.style.display = 'block';
+
+                                   // Remove previous event listener
+                                   const newConfirmBtn = confirmBtn.cloneNode(true);
+                                   confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
+
+                                   // Add new event listener
+                                   newConfirmBtn.addEventListener('click', onConfirm);
+                               }
+
+                               function closeModal() {
+                                   confirmModal.style.display = 'none';
+                               }
+
+                               function confirmAction() {
+                                   // This will be overridden by the specific action
+                                   closeModal();
+                               }
+
+                               function showLoading(show) {
+                                   const saveText = saveBtn.querySelector('span');
+                                   if (show) {
+                                       saveText.style.display = 'none';
+                                       saveSpinner.style.display = 'flex';
+                                       saveBtn.disabled = true;
+                                   } else {
+                                       saveText.style.display = 'inline';
+                                       saveSpinner.style.display = 'none';
+                                       saveBtn.disabled = false;
+                                   }
+                               }
+
+                               function showMessage(message, type = 'success') {
+                                   const messageDiv = document.createElement('div');
+                                   messageDiv.className = `message ${type}`;
+
+                                   const icon = type === 'success' ? 'fa-check-circle' :
+                                       type === 'error' ? 'fa-exclamation-circle' :
+                                           'fa-exclamation-triangle';
+
+                                   messageDiv.innerHTML = `
+            <i class="fas ${icon}"></i>
+            <span>${message}</span>
+        `;
+
+                                   messages.appendChild(messageDiv);
+
+                                   // Auto-remove after 5 seconds
+                                   setTimeout(() => {
+                                       if (messageDiv.parentNode) {
+                                           messageDiv.parentNode.removeChild(messageDiv);
+                                       }
+                                   }, 5000);
+
+                                   // Scroll to message
+                                   messageDiv.scrollIntoView({ behavior: 'smooth' });
+                               }
+
+                               function loadUserData() {
+                                   // Load saved user data (in real app, this would come from API)
+                                   const savedData = localStorage.getItem('userProfile');
+                                   if (savedData) {
+                                       const userData = JSON.parse(savedData);
+                                       Object.keys(userData).forEach(key => {
+                                           const field = document.getElementById(key);
+                                           if (field) {
+                                               field.value = userData[key];
+                                           }
+                                       });
+                                       updateDisplayValues(userData);
+                                   }
+                               }
+
+                               function updateDisplayValues(userData) {
+                                   if (userData.phone) displayPhone.textContent = userData.phone;
+                                   if (userData.email) displayEmail.textContent = userData.email;
+                                   if (userData.city || userData.state) {
+                                       displayLocation.textContent = `${userData.city || 'City'}, ${userData.state || 'State'}`;
+                                   }
+                               }
+
+                               function resetForm() {
+                                   // Reset to original values
+                                   document.getElementById('firstName').value = 'Jenil';
+                                   document.getElementById('lastName').value = 'Patel';
+                                   document.getElementById('email').value = 'jenil@example.com';
+                                   document.getElementById('phone').value = '+1 555 000 0000';
+                                   document.getElementById('address').value = '123 Main Street';
+                                   document.getElementById('city').value = 'New York';
+                                   document.getElementById('state').value = 'NY';
+                                   document.getElementById('zipCode').value = '10001';
+                                   document.getElementById('bio').value = 'Frequent traveler who loves exploring new cities with RideNow. Always looking for the best routes and reliable rides.';
+
+                                   // Reset avatar
+                                   avatar.innerHTML = '<i class="fas fa-user"></i>';
+
+                                   // Clear messages
+                                   messages.innerHTML = '';
+
+                                   showMessage('Form reset to original values.', 'warning');
+                               }
+
+                               // Form field validation on blur
+                               document.querySelectorAll('.form-input, .form-textarea, .form-select').forEach(field => {
+                                   field.addEventListener('blur', function () {
+                                       if (this.hasAttribute('required') && !this.value.trim()) {
+                                           this.style.borderColor = 'var(--error-color)';
+                                       } else {
+                                           this.style.borderColor = '#e2e8f0';
+                                       }
+                                   });
+
+                                   field.addEventListener('input', function () {
+                                       if (this.style.borderColor === 'rgb(229, 62, 62)') {
+                                           this.style.borderColor = '#e2e8f0';
+                                       }
+                                   });
+                               });
+                    </script>
+                </body>
+    </html>
+</asp:Content>
+

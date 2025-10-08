@@ -1,0 +1,597 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="book-ride.master.cs" Inherits="RideNow.book_ride" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+
+                <!DOCTYPE html>
+                <html lang="en" class="no-js">
+                <head>
+                    <!-- Mobile Specific Meta -->
+                    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                    <!-- Favicon-->
+                    <link rel="shortcut icon" href="img/fav.png">
+                    <!-- Author Meta -->
+                    <meta name="author" content="colorlib">
+                    <!-- Meta Description -->
+                    <meta name="description" content="">
+                    <!-- Meta Keyword -->
+                    <meta name="keywords" content="">
+                    <!-- meta character set -->
+                    <meta charset="UTF-8">
+                    <!-- Site Title -->
+                    <title>RideNow - Book Your Ride</title>
+
+                    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+                    <!--
+		CSS
+		============================================= -->
+                    <link rel="stylesheet" href="css/linearicons.css">
+                    <link rel="stylesheet" href="css/font-awesome.min.css">
+                    <link rel="stylesheet" href="css/bootstrap.css">
+                    <link rel="stylesheet" href="css/magnific-popup.css">
+                    <link rel="stylesheet" href="css/nice-select.css">
+                    <link rel="stylesheet" href="css/animate.min.css">
+                    <link rel="stylesheet" href="css/jquery-ui.css">
+                    <link rel="stylesheet" href="css/main.css">
+                    <link rel="stylesheet" href="css/intro.css">
+                    <link rel="stylesheet" href="css/auth.css">
+                </head>
+                <body class="booking-page">
+                    <header id="header">
+                        <div class="main-menu">
+                            <div class="header-content">
+                                <a href="index.html" class="logo-text">RideNow</a>
+                                <nav id="nav-menu-container">
+                                    <ul class="nav-menu">
+                                        <li><a href="index.html">Home</a></li>
+                                        <li><a href="about.html">About</a></li>
+                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="user-dashboard.html">Dashboard</a></li>
+                                        <li><a href="login.html">Log in</a></li>
+                                        <li><a href="register.html" class="signup-btn">Sign up</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </header>
+                    <!-- #header -->
+
+                    <!-- Hero Section with Animated Background -->
+                    <section class="booking-hero">
+                        <div class="hero-background">
+                            <div class="floating-cars">
+                                <div class="car car-1"></div>
+                                <div class="car car-2"></div>
+                                <div class="car car-3"></div>
+                                <div class="car car-4"></div>
+                            </div>
+                            <div class="route-lines">
+                                <div class="route-line line-1"></div>
+                                <div class="route-line line-2"></div>
+                                <div class="route-line line-3"></div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6">
+                                    <div class="hero-content" style="margin-right: 10em;">
+                                        <h1 class="hero-title">Book Your Perfect Ride</h1>
+                                        <p class="hero-subtitle">Experience seamless transportation with our premium ride booking service. Fast, reliable, and affordable rides tailored to your needs.</p>
+                                        <div class="hero-features">
+                                            <div class="feature-item">
+                                                <i class="fa fa-clock-o"></i>
+                                                <span>24/7 Availability</span>
+                                            </div>
+                                            <div class="feature-item">
+                                                <i class="fa fa-shield"></i>
+                                                <span>Safe & Secure</span>
+                                            </div>
+                                            <div class="feature-item">
+                                                <i class="fa fa-star"></i>
+                                                <span>Premium Service</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="booking-card-wrapper">
+                                        <div class="booking-card">
+                                            <div class="card-header">
+                                                <h2 class="card-title">
+                                                    <i class="fa fa-car"></i>
+                                                    Ride Booking
+                                                </h2>
+                                                <div class="booking-steps">
+                                                    <div class="step active">1</div>
+                                                    <div class="step-line"></div>
+                                                    <div class="step">2</div>
+                                                    <div class="step-line"></div>
+                                                    <div class="step">3</div>
+                                                </div>
+                                            </div>
+                                            <form class="booking-form" id="ride-booking-form">
+                                                <div class="form-row">
+                                                    <div class="form-group">
+                                                        <label for="rb-name">Full name</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                                            </div>
+                                                            <input id="rb-name" class="form-control" type="text" name="name" placeholder="Full name" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="rb-phone">Phone</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                                                            </div>
+                                                            <input id="rb-phone" class="form-control" type="tel" name="phone" placeholder="Phone" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group">
+                                                        <label for="rb-type">Vehicle type</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fa fa-car"></i></span>
+                                                            </div>
+                                                            <select id="rb-type" name="vehicle_type" class="form-control" required>
+                                                                <option value="" disabled selected hidden>Choose type</option>
+                                                                <option value="sedan">Sedan</option>
+                                                                <option value="suv">SUV</option>
+                                                                <option value="hatchback">Hatchback</option>
+                                                                <option value="luxury">Luxury</option>
+                                                                <option value="van">Van</option>
+                                                                <option value="truck">Truck</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="rb-model">Vehicle model (optional)</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fa fa-cog"></i></span>
+                                                            </div>
+                                                            <input id="rb-model" class="form-control" type="text" name="vehicle_model" placeholder="e.g., Corolla">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group">
+                                                        <label for="rb-fare">Total fare</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fa fa-dollar"></i></span>
+                                                            </div>
+                                                            <input id="rb-fare" class="form-control" type="number" name="total_fare" min="0" step="0.01" placeholder="0.00" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="rb-time">Pickup time</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                                            </div>
+                                                            <input id="rb-time" name="pickup_time" class="form-control" placeholder="Pickup date & time" type="datetime-local" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group">
+                                                        <label for="rb-pickup">Pickup address</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                                            </div>
+                                                            <textarea id="rb-pickup" class="form-control" name="pickup_address" rows="2" placeholder="Pickup address" required></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="rb-drop">Dropoff address</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fa fa-flag"></i></span>
+                                                            </div>
+                                                            <textarea id="rb-drop" class="form-control" name="dropoff_address" rows="2" placeholder="Dropoff address" required></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-actions">
+                                                    <button class="btn btn-primary btn-lg" type="submit">
+                                                        <i class="fa fa-car"></i>
+                                                        Book Ride
+                                                    </button>
+                                                    <div class="booking-info">
+                                                        <i class="fa fa-info-circle"></i>
+                                                        <span>Your ride will be confirmed within 2 minutes</span>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Features Section -->
+                    <section class="booking-features">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="feature-card scroll-animate">
+                                        <div class="feature-icon">
+                                            <i class="fa fa-clock-o"></i>
+                                        </div>
+                                        <h3>Quick Booking</h3>
+                                        <p>Book your ride in under 30 seconds with our streamlined booking process.</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="feature-card scroll-animate delay-1">
+                                        <div class="feature-icon">
+                                            <i class="fa fa-map-marker"></i>
+                                        </div>
+                                        <h3>Real-time Tracking</h3>
+                                        <p>Track your ride in real-time and know exactly when your driver will arrive.</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="feature-card scroll-animate delay-2">
+                                        <div class="feature-icon">
+                                            <i class="fa fa-shield"></i>
+                                        </div>
+                                        <h3>Safe & Secure</h3>
+                                        <p>All drivers are verified and vehicles are regularly inspected for your safety.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- simplified: extra sections removed for clean theme -->
+
+                    <!-- start footer Area -->
+                    <footer class="footer-section">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="footer-widget">
+                                        <h3>RideNow</h3>
+                                        <p>Your trusted partner for safe, reliable, and affordable transportation services.</p>
+                                        <div class="social-links">
+                                            <a href="#"><i class="fa fa-facebook"></i></a>
+                                            <a href="#"><i class="fa fa-twitter"></i></a>
+                                            <a href="#"><i class="fa fa-instagram"></i></a>
+                                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="footer-widget">
+                                        <h4>Services</h4>
+                                        <ul>
+                                            <li><a href="#">City Rides</a></li>
+                                            <li><a href="#">Airport Transfer</a></li>
+                                            <li><a href="#">Event Transport</a></li>
+                                            <li><a href="#">Business Travel</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="footer-widget">
+                                        <h4>Company</h4>
+                                        <ul>
+                                            <li><a href="#">About Us</a></li>
+                                            <li><a href="#">Careers</a></li>
+                                            <li><a href="#">Press</a></li>
+                                            <li><a href="#">Blog</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="footer-widget">
+                                        <h4>Support</h4>
+                                        <ul>
+                                            <li><a href="#">Help Center</a></li>
+                                            <li><a href="#">Safety</a></li>
+                                            <li><a href="#">Terms</a></li>
+                                            <li><a href="#">Privacy</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="footer-widget">
+                                        <h4>Download</h4>
+                                        <div class="app-links">
+                                            <a href="#" class="app-link">
+                                                <i class="fa fa-apple"></i>
+                                                <span>App Store</span>
+                                            </a>
+                                            <a href="#" class="app-link">
+                                                <i class="fa fa-android"></i>
+                                                <span>Google Play</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="footer-bottom">
+                                <p>&copy;
+                                    <script>document.write(new Date().getFullYear());</script>
+                                    RideNow. All rights reserved.</p>
+                            </div>
+                        </div>
+                    </footer>
+                    <!-- End footer Area -->
+
+                    <!-- Coming Soon Modal -->
+                    <div class="coming-soon-modal" id="comingSoonModal">
+                        <div class="coming-soon-content">
+                            <div class="coming-soon-icon">
+                                <i class="fa fa-rocket"></i>
+                            </div>
+                            <h3 class="coming-soon-title">Coming Soon!</h3>
+                            <p class="coming-soon-message">This feature is currently under development. We're working hard to bring you an amazing experience. Stay tuned!</p>
+                            <button class="coming-soon-close" onclick="closeComingSoon()">Got it!</button>
+                        </div>
+                    </div>
+
+                    <script src="js/vendor/jquery-2.2.4.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+                    <script src="js/vendor/bootstrap.min.js"></script>
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+                    <script src="js/easing.min.js"></script>
+                    <script src="js/hoverIntent.js"></script>
+                    <script src="js/superfish.min.js"></script>
+                    <script src="js/jquery.ajaxchimp.min.js"></script>
+                    <script src="js/jquery.magnific-popup.min.js"></script>
+                    <script src="js/jquery-ui.js"></script>
+                    <script src="js/jquery.nice-select.min.js"></script>
+                    <script src="js/mail-script.js"></script>
+                    <script src="js/main.js"></script>
+
+                    <script>
+                        $(document).ready(function () {
+                            // Scroll Animation Observer
+                            const observerOptions = {
+                                threshold: 0.1,
+                                rootMargin: '0px 0px -50px 0px'
+                            };
+
+                            const observer = new IntersectionObserver(function (entries) {
+                                entries.forEach(entry => {
+                                    if (entry.isIntersecting) {
+                                        entry.target.classList.add('animate');
+                                    }
+                                });
+                            }, observerOptions);
+
+                            // Observe all scroll animate elements
+                            document.querySelectorAll('.scroll-animate, .scroll-animate-left, .scroll-animate-right, .scroll-animate-scale, .scroll-animate-rotate').forEach(el => {
+                                observer.observe(el);
+                            });
+
+                            // Form validation functions
+                            function validateField(field) {
+                                const value = field.val().trim();
+                                const fieldName = field.attr('name');
+                                let isValid = true;
+                                let errorMessage = '';
+
+                                // Remove previous error states
+                                field.removeClass('error success');
+                                field.closest('.form-group').removeClass('has-error');
+                                field.siblings('.form-error').remove();
+
+                                // Required field validation
+                                if (field.prop('required') && value === '') {
+                                    isValid = false;
+                                    errorMessage = 'This field is required';
+                                }
+
+                                // Email validation
+                                if (fieldName === 'email' && value !== '') {
+                                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                    if (!emailRegex.test(value)) {
+                                        isValid = false;
+                                        errorMessage = 'Please enter a valid email address';
+                                    }
+                                }
+
+                                // Phone validation
+                                if (fieldName === 'phone' && value !== '') {
+                                    const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+                                    if (!phoneRegex.test(value.replace(/\s/g, ''))) {
+                                        isValid = false;
+                                        errorMessage = 'Please enter a valid phone number';
+                                    }
+                                }
+
+                                // Name validation
+                                if (fieldName === 'name' && value !== '') {
+                                    if (value.length < 2) {
+                                        isValid = false;
+                                        errorMessage = 'Name must be at least 2 characters long';
+                                    }
+                                }
+
+                                // Fare validation
+                                if (fieldName === 'total_fare' && value !== '') {
+                                    const fare = parseFloat(value);
+                                    if (isNaN(fare) || fare < 0) {
+                                        isValid = false;
+                                        errorMessage = 'Please enter a valid fare amount';
+                                    }
+                                }
+
+                                // Set field state
+                                if (isValid) {
+                                    field.addClass('success');
+                                } else {
+                                    field.addClass('error');
+                                    field.closest('.form-group').addClass('has-error');
+                                    field.after(`<div class="form-error">${errorMessage}</div>`);
+                                }
+
+                                return isValid;
+                            }
+
+                            // Form validation and interaction
+                            $('#ride-booking-form').on('submit', function (e) {
+                                e.preventDefault();
+
+                                // Validate all required fields
+                                let isValid = true;
+                                $('.booking-form .form-control[required]').each(function () {
+                                    if (!validateField($(this))) {
+                                        isValid = false;
+                                    }
+                                });
+
+                                if (isValid) {
+                                    // Show loading state
+                                    $('.btn-primary').html('<i class="fa fa-spinner fa-spin"></i> Processing...');
+                                    $('.btn-primary').prop('disabled', true);
+
+                                    // Show processing message
+                                    $('.booking-info').html('<i class="fa fa-spinner fa-spin"></i><span>Processing your booking request...</span>');
+                                    $('.booking-info').css('color', '#007bff');
+
+                                    // Simulate processing time (1.5 seconds)
+                                    setTimeout(function () {
+                                        // Show success state
+                                        $('.btn-primary').html('<i class="fa fa-check"></i> Success!');
+                                        $('.btn-primary').removeClass('btn-primary').addClass('btn-success');
+
+                                        // Show success message
+                                        $('.booking-info').html('<i class="fa fa-check-circle"></i><span>Your ride has been successfully booked! Redirecting to dashboard...</span>');
+                                        $('.booking-info').css('color', '#28a745');
+
+                                        // Redirect to user dashboard after 1 more second
+                                        setTimeout(function () {
+                                            window.location.href = 'user-dashboard.html';
+                                        }, 1000);
+
+                                    }, 1500);
+                                } else {
+                                    // Show error message
+                                    $('.booking-info').html('<i class="fa fa-exclamation-circle"></i><span>Please fix the errors above and try again.</span>');
+                                    $('.booking-info').css('color', '#dc3545');
+                                }
+                            });
+
+                            // Real-time validation on input
+                            $('.booking-form .form-control').on('blur input', function () {
+                                validateField($(this));
+                            });
+
+                            // Real-time fare calculation
+                            $('#rb-type').on('change', function () {
+                                const vehicleType = $(this).val();
+                                let baseFare = 0;
+
+                                switch (vehicleType) {
+                                    case 'sedan':
+                                        baseFare = 15.00;
+                                        break;
+                                    case 'suv':
+                                        baseFare = 25.00;
+                                        break;
+                                    case 'hatchback':
+                                        baseFare = 12.00;
+                                        break;
+                                    case 'luxury':
+                                        baseFare = 50.00;
+                                        break;
+                                    case 'van':
+                                        baseFare = 30.00;
+                                        break;
+                                    case 'truck':
+                                        baseFare = 40.00;
+                                        break;
+                                }
+
+                                if (baseFare > 0) {
+                                    $('#rb-fare').val(baseFare.toFixed(2));
+                                    validateField($('#rb-fare'));
+                                }
+                            });
+
+                            // Animate form elements on focus
+                            $('.booking-form .form-control').on('focus', function () {
+                                $(this).closest('.form-group').addClass('focused');
+                            }).on('blur', function () {
+                                if ($(this).val() === '') {
+                                    $(this).closest('.form-group').removeClass('focused');
+                                }
+                            });
+
+                            // Step progression animation
+                            $('.booking-form .form-control').on('input change', function () {
+                                const filledFields = $('.booking-form .form-control[required]').filter(function () {
+                                    return $(this).val() !== '';
+                                }).length;
+
+                                const totalFields = $('.booking-form .form-control[required]').length;
+                                const progress = (filledFields / totalFields) * 100;
+
+                                if (progress >= 33) {
+                                    $('.step').eq(1).addClass('active');
+                                }
+                                if (progress >= 66) {
+                                    $('.step').eq(2).addClass('active');
+                                }
+                            });
+
+                            // Add floating label effect
+                            $('.booking-form .form-control').each(function () {
+                                if ($(this).val() !== '') {
+                                    $(this).closest('.form-group').addClass('focused');
+                                }
+                            });
+
+                            // Coming soon functionality for buttons
+                            $('a[href="#"], button:not(.coming-soon-close):not(.btn-primary)').on('click', function (e) {
+                                e.preventDefault();
+                                showComingSoon();
+                            });
+                        });
+
+                        // Coming Soon Modal Functions
+                        function showComingSoon() {
+                            $('#comingSoonModal').css('display', 'flex');
+                            $('body').css('overflow', 'hidden');
+                        }
+
+                        function closeComingSoon() {
+                            $('#comingSoonModal').css('display', 'none');
+                            $('body').css('overflow', 'auto');
+                        }
+
+                        // Close modal when clicking outside
+                        $(document).on('click', '.coming-soon-modal', function (e) {
+                            if (e.target === this) {
+                                closeComingSoon();
+                            }
+                        });
+                    </script>
+                </body>
+                </html>
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>

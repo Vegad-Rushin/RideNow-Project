@@ -1,0 +1,783 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="driverRegister.master.cs" Inherits="RideNow.driver.driverRegister" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Driver Registration - RideHail Pro</title>
+                    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+                    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+                </head>
+                <body>
+                    <header id="header">
+                        <div class="main-menu">
+                            <div class="header-content">
+                                <a href="../index.aspx" class="logo-text">RideNow</a>
+                                <nav id="nav-menu-container">
+                                    <ul class="nav-menu">
+                                        <li><a href="dashboard.aspx" class="active">Dashboard</a></li>
+                                        <li><a href="driver_registretion.aspx" class="active">d&registretion</a></li>
+                                        <li><a href="profile.aspx">Profile</a></li>
+                                        <li><a href="../login.aspx" class="signup-btn">Logout</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="container">
+                        <div class="header">
+                            <h1><i class="fas fa-car"></i>Driver Registration</h1>
+                            <p>
+                                Join our network of professional drivers and start earning today
+                            </p>
+                        </div>
+                        <div class="registration-card">
+                            <div class="form-container">
+                                <div class="success-message" id="successMessage">
+                                    <i class="fas fa-check-circle"></i>Registration successful! Welcome to our driver network.
+                                </div>
+                                <form id="driverRegistrationForm">
+                                    <!-- Personal Information Section -->
+                                    <div class="form-section">
+                                        <h2 class="section-title">Personal Information</h2>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label for="fullName" class="required">
+                                                    Full Name</label>
+                                                <div class="input-wrapper">
+                                                    <input type="text" id="fullName" name="fullName" class="form-control" placeholder="Enter your full name" required>
+                                                    <i class="fas fa-user input-icon"></i>
+                                                </div>
+                                                <div class="error-message">
+                                                    Please enter your full name
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email" class="required">
+                                                    Email Address</label>
+                                                <div class="input-wrapper">
+                                                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+                                                    <i class="fas fa-envelope input-icon"></i>
+                                                </div>
+                                                <div class="error-message">
+                                                    Please enter a valid email address
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label for="phone" class="required">
+                                                    Phone Number</label>
+                                                <div class="input-wrapper">
+                                                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="Enter 10-digit phone number" maxlength="10" required>
+                                                    <i class="fas fa-phone input-icon"></i>
+                                                </div>
+                                                <div class="error-message">
+                                                    Please enter a valid 10-digit phone number
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="dateOfBirth" class="required">
+                                                    Date of Birth</label>
+                                                <div class="input-wrapper">
+                                                    <input type="date" id="dateOfBirth" name="dateOfBirth" class="form-control" required>
+                                                    <i class="fas fa-calendar input-icon"></i>
+                                                </div>
+                                                <div class="error-message">
+                                                    Please select your date of birth
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <!-- License Information Section -->
+                                        <div class="form-section">
+                                            <h2 class="section-title">License Information</h2>
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label for="licenseNumber" class="required">
+                                                        Driving License Number</label>
+                                                    <div class="input-wrapper">
+                                                        <input type="text" id="licenseNumber" name="licenseNumber" class="form-control" placeholder="Enter license number" required>
+                                                        <i class="fas fa-id-card input-icon"></i>
+                                                    </div>
+                                                    <div class="error-message">
+                                                        Please enter your driving license number
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="licenseExpiry" class="required">
+                                                        License Expiry Date</label>
+                                                    <div class="input-wrapper">
+                                                        <input type="date" id="licenseExpiry" name="licenseExpiry" class="form-control" required>
+                                                        <i class="fas fa-calendar input-icon"></i>
+                                                    </div>
+                                                    <div class="error-message">
+                                                        Please select license expiry date
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <!-- Account Security Section -->
+                                            <div class="form-section">
+                                                <h2 class="section-title">Account Security</h2>
+                                                <div class="form-row">
+                                                    <div class="form-group">
+                                                        <label for="password" class="required">
+                                                            Password</label>
+                                                        <div class="input-wrapper">
+                                                            <input type="password" id="password" name="password" class="form-control" placeholder="Create a strong password" required>
+                                                            <i class="fas fa-lock input-icon"></i>
+                                                        </div>
+                                                        <div class="password-strength">
+                                                            <div class="strength-bar">
+                                                                <div class="strength-fill" id="strengthFill">
+                                                                </div>
+                                                            </div>
+                                                            <span id="strengthText">Password strength</span>
+                                                        </div>
+                                                        <div class="error-message">
+                                                            Password must be at least 8 characters long
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="confirmPassword" class="required">
+                                                            Confirm Password</label>
+                                                        <div class="input-wrapper">
+                                                            <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="Confirm your password" required>
+                                                            <i class="fas fa-lock input-icon"></i>
+                                                        </div>
+                                                        <div class="error-message">
+                                                            Passwords do not match
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Terms and Conditions -->
+                                            <div class="form-section">
+                                                <div class="checkbox-group">
+                                                    <input type="checkbox" id="terms" name="terms" required>
+                                                    <label for="terms">
+                                                        I agree to the <a href="#" class="terms-link">Terms and Conditions</a> and <a href="#" class="terms-link">Privacy Policy</a>
+                                                    </label>
+                                                </div>
+                                                <div class="error-message" id="termsError">
+                                                    You must agree to the terms and conditions
+                                                </div>
+                                            </div>
+
+                                            <!-- Submit Button -->
+                                            <div class="submit-section">
+                                                <button type="submit" class="btn-submit" id="submitBtn">
+                                                    <i class="fas fa-user-plus"></i>Register as Driver
+                                                </button>
+                                            </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <style>
+                        * {
+                            margin: 0;
+                            padding: 0;
+                            box-sizing: border-box;
+                        }
+
+                        body {
+                            font-family: 'Roboto', sans-serif;
+                            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                            min-height: 100vh;
+                            padding: 20px;
+                            line-height: 1.6;
+                        }
+
+                        .container {
+                            max-width: 800px;
+                            margin: 0 auto;
+                        }
+
+                        .header {
+                            text-align: center;
+                            margin-bottom: 30px;
+                            color: white;
+                        }
+
+                            .header h1 {
+                                font-size: 2.5rem;
+                                font-weight: 700;
+                                margin-bottom: 10px;
+                                text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+                            }
+
+                            .header p {
+                                font-size: 1.1rem;
+                                opacity: 0.9;
+                                font-weight: 300;
+                            }
+
+                        .registration-card {
+                            background: white;
+                            border-radius: 20px;
+                            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+                            overflow: hidden;
+                            margin-bottom: 30px;
+                        }
+
+                        .form-container {
+                            padding: 40px;
+                        }
+
+                        .form-section {
+                            margin-bottom: 40px;
+                        }
+
+                        .section-title {
+                            font-size: 1.3rem;
+                            font-weight: 600;
+                            color: #333;
+                            margin-bottom: 20px;
+                            padding-bottom: 10px;
+                            border-bottom: 2px solid #f0f0f0;
+                            position: relative;
+                        }
+
+                            .section-title::after {
+                                content: '';
+                                position: absolute;
+                                bottom: -2px;
+                                left: 0;
+                                width: 50px;
+                                height: 2px;
+                                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                            }
+
+                        .form-row {
+                            display: grid;
+                            grid-template-columns: 1fr 1fr;
+                            gap: 20px;
+                            margin-bottom: 20px;
+                        }
+
+                        .form-group {
+                            position: relative;
+                            margin-bottom: 20px;
+                        }
+
+                            .form-group.full-width {
+                                grid-column: 1 / -1;
+                            }
+
+                            .form-group label {
+                                display: block;
+                                margin-bottom: 8px;
+                                font-weight: 500;
+                                color: #555;
+                                font-size: 0.9rem;
+                            }
+
+                                .form-group label.required::after {
+                                    content: ' *';
+                                    color: #e74c3c;
+                                }
+
+                        .input-wrapper {
+                            position: relative;
+                        }
+
+                        .form-control {
+                            width: 100%;
+                            padding: 15px 15px 15px 45px;
+                            border: 2px solid #e1e5e9;
+                            border-radius: 12px;
+                            font-size: 1rem;
+                            transition: all 0.3s ease;
+                            background: #fafbfc;
+                        }
+
+                            .form-control:focus {
+                                outline: none;
+                                border-color: #667eea;
+                                background: white;
+                                box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+                            }
+
+                            .form-control:hover {
+                                border-color: #c1c8d0;
+                            }
+
+                        .input-icon {
+                            position: absolute;
+                            left: 15px;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            color: #8a94a6;
+                            font-size: 1.1rem;
+                        }
+
+                        .form-control:focus + .input-icon {
+                            color: #667eea;
+                        }
+
+                        textarea.form-control {
+                            padding: 15px;
+                            min-height: 100px;
+                            resize: vertical;
+                        }
+
+                        select.form-control {
+                            padding: 15px 15px 15px 45px;
+                            cursor: pointer;
+                        }
+
+                        .file-upload {
+                            position: relative;
+                            display: inline-block;
+                            width: 100%;
+                        }
+
+                            .file-upload input[type="file"] {
+                                position: absolute;
+                                opacity: 0;
+                                width: 100%;
+                                height: 100%;
+                                cursor: pointer;
+                            }
+
+                        .file-upload-label {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            padding: 15px;
+                            border: 2px dashed #c1c8d0;
+                            border-radius: 12px;
+                            background: #fafbfc;
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                            text-align: center;
+                        }
+
+                            .file-upload-label:hover {
+                                border-color: #667eea;
+                                background: #f8f9ff;
+                            }
+
+                            .file-upload-label i {
+                                margin-right: 10px;
+                                color: #8a94a6;
+                            }
+
+                        .checkbox-group {
+                            display: flex;
+                            align-items: flex-start;
+                            gap: 12px;
+                            margin-top: 20px;
+                        }
+
+                            .checkbox-group input[type="checkbox"] {
+                                width: 18px;
+                                height: 18px;
+                                margin-top: 2px;
+                                accent-color: #667eea;
+                            }
+
+                            .checkbox-group label {
+                                margin: 0;
+                                font-size: 0.9rem;
+                                line-height: 1.4;
+                            }
+
+                        .terms-link {
+                            color: #667eea;
+                            text-decoration: none;
+                        }
+
+                            .terms-link:hover {
+                                text-decoration: underline;
+                            }
+
+                        .submit-section {
+                            text-align: center;
+                            margin-top: 40px;
+                            padding-top: 30px;
+                            border-top: 1px solid #e1e5e9;
+                        }
+
+                        .btn-submit {
+                            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                            color: white;
+                            border: none;
+                            padding: 18px 50px;
+                            font-size: 1.1rem;
+                            font-weight: 600;
+                            border-radius: 50px;
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+                            text-transform: uppercase;
+                            letter-spacing: 1px;
+                        }
+
+                            .btn-submit:hover {
+                                transform: translateY(-2px);
+                                box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+                            }
+
+                            .btn-submit:active {
+                                transform: translateY(0);
+                            }
+
+                            .btn-submit:disabled {
+                                opacity: 0.6;
+                                cursor: not-allowed;
+                                transform: none;
+                            }
+
+                        .error-message {
+                            color: #e74c3c;
+                            font-size: 0.85rem;
+                            margin-top: 5px;
+                            display: none;
+                        }
+
+                        .form-group.error .form-control {
+                            border-color: #e74c3c;
+                        }
+
+                        .form-group.error .error-message {
+                            display: block;
+                        }
+
+                        .success-message {
+                            background: #d4edda;
+                            color: #155724;
+                            padding: 15px;
+                            border-radius: 8px;
+                            margin-bottom: 20px;
+                            border: 1px solid #c3e6cb;
+                            display: none;
+                        }
+
+                        @media (max-width: 768px) {
+                            .form-row {
+                                grid-template-columns: 1fr;
+                                gap: 0;
+                            }
+
+                            .form-container {
+                                padding: 25px;
+                            }
+
+                            .header h1 {
+                                font-size: 2rem;
+                            }
+
+                            .btn-submit {
+                                width: 100%;
+                                padding: 16px;
+                            }
+                        }
+
+                        @media (max-width: 480px) {
+                            body {
+                                padding: 10px;
+                            }
+
+                            .form-container {
+                                padding: 20px;
+                            }
+
+                            .header h1 {
+                                font-size: 1.8rem;
+                            }
+                        }
+
+                        .password-strength {
+                            margin-top: 5px;
+                            font-size: 0.8rem;
+                        }
+
+                        .strength-bar {
+                            height: 4px;
+                            background: #e1e5e9;
+                            border-radius: 2px;
+                            margin-top: 5px;
+                            overflow: hidden;
+                        }
+
+                        .strength-fill {
+                            height: 100%;
+                            transition: all 0.3s ease;
+                            border-radius: 2px;
+                        }
+
+                        .strength-weak {
+                            background: #e74c3c;
+                            width: 25%;
+                        }
+
+                        .strength-fair {
+                            background: #f39c12;
+                            width: 50%;
+                        }
+
+                        .strength-good {
+                            background: #27ae60;
+                            width: 75%;
+                        }
+
+                        .strength-strong {
+                            background: #2ecc71;
+                            width: 100%;
+                        }
+                    </style>
+
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                                         const form = document.getElementById('driverRegistrationForm');
+                                         const submitBtn = document.getElementById('submitBtn');
+                                         const successMessage = document.getElementById('successMessage');
+
+                                         // Form validation
+                                         function validateField(field) {
+                                             const value = field.value.trim();
+                                             const fieldName = field.name;
+                                             const formGroup = field.closest('.form-group');
+                                             const errorMessage = formGroup.querySelector('.error-message');
+
+                                             let isValid = true;
+                                             let errorText = '';
+
+                                             // Remove existing error state
+                                             formGroup.classList.remove('error');
+
+                                             // Required field validation
+                                             if (field.hasAttribute('required') && !value) {
+                                                 isValid = false;
+                                                 errorText = 'This field is required';
+                                             }
+
+                                             // Specific field validations
+                                             if (value) {
+                                                 switch (fieldName) {
+                                                     case 'email':
+                                                         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                                         if (!emailRegex.test(value)) {
+                                                             isValid = false;
+                                                             errorText = 'Please enter a valid email address';
+                                                         }
+                                                         break;
+
+                                                     case 'phone':
+                                                         const phoneRegex = /^\d{10}$/;
+                                                         if (!phoneRegex.test(value)) {
+                                                             isValid = false;
+                                                             errorText = 'Please enter a valid 10-digit phone number';
+                                                         }
+                                                         break;
+
+                                                     case 'password':
+                                                         if (value.length < 8) {
+                                                             isValid = false;
+                                                             errorText = 'Password must be at least 8 characters long';
+                                                         }
+                                                         break;
+
+                                                     case 'confirmPassword':
+                                                         const password = document.getElementById('password').value;
+                                                         if (value !== password) {
+                                                             isValid = false;
+                                                             errorText = 'Passwords do not match';
+                                                         }
+                                                         break;
+
+                                                     case 'dateOfBirth':
+                                                         const birthDate = new Date(value);
+                                                         const today = new Date();
+                                                         const age = today.getFullYear() - birthDate.getFullYear();
+                                                         if (age < 18) {
+                                                             isValid = false;
+                                                             errorText = 'You must be at least 18 years old';
+                                                         }
+                                                         break;
+
+                                                     case 'licenseExpiry':
+                                                         const expiryDate = new Date(value);
+                                                         if (expiryDate <= new Date()) {
+                                                             isValid = false;
+                                                             errorText = 'License must not be expired';
+                                                         }
+                                                         break;
+                                                 }
+                                             }
+
+                                             // Show/hide error
+                                             if (!isValid) {
+                                                 formGroup.classList.add('error');
+                                                 errorMessage.textContent = errorText;
+                                             }
+
+                                             return isValid;
+                                         }
+
+                                         // Password strength checker
+                                         function checkPasswordStrength(password) {
+                                             const strengthFill = document.getElementById('strengthFill');
+                                             const strengthText = document.getElementById('strengthText');
+
+                                             let score = 0;
+                                             let feedback = '';
+
+                                             if (password.length >= 8) score++;
+                                             if (/[a-z]/.test(password)) score++;
+                                             if (/[A-Z]/.test(password)) score++;
+                                             if (/[0-9]/.test(password)) score++;
+                                             if (/[^A-Za-z0-9]/.test(password)) score++;
+
+                                             switch (score) {
+                                                 case 0:
+                                                 case 1:
+                                                     strengthFill.className = 'strength-fill strength-weak';
+                                                     feedback = 'Weak password';
+                                                     break;
+                                                 case 2:
+                                                     strengthFill.className = 'strength-fill strength-fair';
+                                                     feedback = 'Fair password';
+                                                     break;
+                                                 case 3:
+                                                 case 4:
+                                                     strengthFill.className = 'strength-fill strength-good';
+                                                     feedback = 'Good password';
+                                                     break;
+                                                 case 5:
+                                                     strengthFill.className = 'strength-fill strength-strong';
+                                                     feedback = 'Strong password';
+                                                     break;
+                                             }
+
+                                             strengthText.textContent = feedback;
+                                         }
+
+                                         // Real-time validation
+                                         form.addEventListener('input', function (e) {
+                                             if (e.target.type !== 'submit') {
+                                                 validateField(e.target);
+
+                                                 if (e.target.name === 'password') {
+                                                     checkPasswordStrength(e.target.value);
+                                                 }
+
+                                                 if (e.target.name === 'confirmPassword') {
+                                                     validateField(e.target);
+                                                 }
+                                             }
+                                         });
+
+                                         // File upload feedback
+                                         document.querySelectorAll('input[type="file"]').forEach(fileInput => {
+                                             fileInput.addEventListener('change', function () {
+                                                 const label = this.nextElementSibling;
+                                                 const fileName = this.files[0]?.name;
+
+                                                 if (fileName) {
+                                                     label.innerHTML = <i class="fas fa-check"></i> ${ fileName };
+                                                     label.style.borderColor = '#27ae60';
+                                                     label.style.background = '#d4edda';
+                                                 }
+                                             });
+                                         });
+
+                                         // Terms checkbox validation
+                                         const termsCheckbox = document.getElementById('terms');
+                                         const termsError = document.getElementById('termsError');
+
+                                         termsCheckbox.addEventListener('change', function () {
+                                             if (!this.checked) {
+                                                 termsError.style.display = 'block';
+                                             } else {
+                                                 termsError.style.display = 'none';
+                                             }
+                                         });
+
+                                         // Form submission
+                                         form.addEventListener('submit', function (e) {
+                                             e.preventDefault();
+
+                                             // Validate all fields
+                                             const fields = form.querySelectorAll('input, select, textarea');
+                                             let isFormValid = true;
+
+                                             fields.forEach(field => {
+                                                 if (!validateField(field)) {
+                                                     isFormValid = false;
+                                                 }
+                                             });
+
+                                             // Check terms and conditions
+                                             if (!termsCheckbox.checked) {
+                                                 termsError.style.display = 'block';
+                                                 isFormValid = false;
+                                             }
+
+                                             if (isFormValid) {
+                                                 // Simulate form submission
+                                                 submitBtn.disabled = true;
+                                                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Registering...';
+
+                                                 setTimeout(() => {
+                                                     successMessage.style.display = 'block';
+                                                     form.reset();
+                                                     submitBtn.disabled = false;
+                                                     submitBtn.innerHTML = '<i class="fas fa-user-plus"></i> Register as Driver';
+
+                                                     // Reset password strength
+                                                     document.getElementById('strengthFill').className = 'strength-fill';
+                                                     document.getElementById('strengthText').textContent = 'Password strength';
+
+                                                     // Scroll to success message
+                                                     successMessage.scrollIntoView({ behavior: 'smooth' });
+
+                                                     // Hide success message after 5 seconds
+                                                     setTimeout(() => {
+                                                         successMessage.style.display = 'none';
+                                                     }, 5000);
+                                                 }, 2000);
+                                             } else {
+                                                 // Scroll to first error
+                                                 const firstError = form.querySelector('.form-group.error');
+                                                 if (firstError) {
+                                                     firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                                 }
+                                             }
+                                         });
+
+                                         // Phone number formatting
+                                         const phoneInput = document.getElementById('phone');
+                                         phoneInput.addEventListener('input', function () {
+                                             this.value = this.value.replace(/\D/g, '');
+                                         });
+                                     });
+                    </script >
+                </body >
+                </html>
+
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>
