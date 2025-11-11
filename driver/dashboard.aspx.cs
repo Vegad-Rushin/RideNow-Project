@@ -59,13 +59,11 @@ namespace RideNow.driver
             Response.Redirect("dashboard.aspx");
         }
 
-        // --- CORRECTED METHOD ---
+        
         void LoadRideRequests(string driverId)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                // THE FIX: This query now looks for rides where the booking's driver_id
-                // matches the ID of the driver who is currently logged in.
                 string query = @"
             SELECT TOP 4 
                 b.booking_id, 
@@ -92,7 +90,7 @@ namespace RideNow.driver
                 {
                     rptRideRequests.Visible = false;
                     litNoRequests.Visible = true;
-                    // The message from your screenshot is better, so we'll keep it.
+                    
                     litNoRequests.Text = "<div class='text-center p-4'>No new ride requests for your vehicle type at the moment.</div>";
                     litRequestCount.Text = "";
                 }

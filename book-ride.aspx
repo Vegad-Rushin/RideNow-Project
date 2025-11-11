@@ -65,7 +65,10 @@
                                 <div class="card-header">
                                     <h2 class="card-title"><i class="fa fa-car"></i>Ride Booking <a href="../user-dashboard.aspx" style="position: absolute; font-size: 16px; right: 50px;"><i class="fa-solid fa-angle-left" style="font-size: 16px;"></i>BACK</a></h2>
                                 </div>
+
                                 <!-- ASP.NET Form Starts Here -->
+                                <div id="map" style="width:100%; height:300px; border-radius:10px; margin-bottom:15px;"></div>
+
                                 <div class="booking-form">
                                     <div class="form-row">
                                         <div class="form-group">
@@ -110,7 +113,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fa fa-road"></i></span>
                                                 </div>
-                                                <asp:TextBox ID="txtDistance" runat="server" CssClass="form-control" TextMode="Number" placeholder="e.g., 10"></asp:TextBox>
+                                                <asp:TextBox ID="txtDistance" runat="server" CssClass="form-control" TextMode="Number" placeholder="e.g., 10" step="0.01"></asp:TextBox>
                                             </div>
                                         </div>
 
@@ -187,6 +190,61 @@
         <script src="js/vendor/jquery-2.2.4.min.js"></script>
         <script src="js/vendor/bootstrap.min.js"></script>
         <script src="js/main.js"></script>
+        <script>
+            let map, directionsService, directionsRenderer, autocompletePickup, autocompleteDrop;
+
+            function initMap() {
+                const defaultCenter = { lat: 19.0760, lng: 72.8777 }; // change if you want a different center
+                map = new google.maps.Map(document.getElementById("map"), { center: defaultCenter, zoom: 12 });
+                directionsService = new google.maps.DirectionsService();
+                directionsRenderer = new google.maps.DirectionsRenderer({ map: map });
+
+                const pickup = document.getElementById("<%= txtPickupAddress.ClientID %>");
+                const drop = document.getElementById("<%= txtDropoffAddress.ClientID %>");
+                const distanceBox = document.getElementById("<%= txtDistance.ClientID %>");
+                const fareBox = document.getElementById("<%= txtFare.ClientID %>");
+
+                autocompletePickup = new google.maps.places.Autocomplete(pickup);
+                autocompleteDrop = new google.maps.places.Autocomplete(drop);
+
+                function calculateRoute() {
+                    if (!pickup.value || !drop.value) {
+                        directionsRenderer.set('directions', null);
+                        distanceBox.value = "";
+                        fareBox.value = "";
+                        return;
+                    }
+                    directionsService.route({
+                        origin: pickup.value,
+                        destination: drop.value,
+                        travelMode: google.maps.TravelMode.DRIVING
+                    }, (result, status) => {
+                        if (status === 'OK') {
+                            directionsRenderer.setDirections(result);
+                            const leg = result.routes[0].legs[0];
+                            const distanceKm = leg.distance.value / 1000;
+                            distanceBox.value = distanceKm.toFixed(2);
+                            fareBox.value = (distanceKm * 15).toFixed(2); // ₹15/km
+                        } else {
+                            console.warn('Directions error:', status);
+                            directionsRenderer.set('directions', null);
+                            distanceBox.value = "";
+                            fareBox.value = "";
+                        }
+                    });
+                }
+
+                autocompletePickup.addListener('place_changed', calculateRoute);
+                autocompleteDrop.addListener('place_changed', calculateRoute);
+            }
+        </script>
+
+
+        <!-- Load Google Maps JS (paste this at the bottom of book-ride.aspx before </body>) -->
+        <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBs_iBag4aCm0_5WlM6SpWwfERXSoKYueY&libraries=places&callback=initMap">
+        </script>
+
     </body>
     </html>
 </asp:Content>

@@ -64,13 +64,11 @@ namespace RideNow
             if (eCount > 0)
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('A user with this email address already exists.');", true);
-                con.Close();
                 return;
             }
             else if (pCount > 0)
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('A user with this phone number already exists.');", true);
-                con.Close();
                 return;
             }
 
@@ -78,7 +76,7 @@ namespace RideNow
             cmd = new SqlCommand(insertQuery, con);
 
             object newUserId = cmd.ExecuteScalar();
-            con.Close();
+            
 
             if (newUserId != null)
             {

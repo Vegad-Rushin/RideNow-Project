@@ -52,8 +52,7 @@ namespace RideNow
                 string userRole = reader["role"].ToString();
                 Session["UserRole"] = userRole;
 
-                reader.Close();
-                con.Close();
+                
                 clear();
 
                 if (userRole == "Driver")
@@ -71,8 +70,7 @@ namespace RideNow
             }
             else
             {
-                reader.Close();
-                con.Close();
+                
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Invalid credentials. Please try again.');", true);
             }
         }

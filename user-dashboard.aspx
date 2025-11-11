@@ -213,7 +213,7 @@
                                                     <div class="ride-meta">
                                                         <span class="date"><%# Convert.ToDateTime(Eval("pickup_time")).ToString("MMM dd, yyyy") %></span>
                                                         <span class="time"><%# Convert.ToDateTime(Eval("pickup_time")).ToString("h:mm tt") %></span>
-                                                        <span class="fare"><%# string.Format("${0:F2}", Eval("total_fare")) %></span>
+                                                        <span class="fare"><%# string.Format("&#8377; {0:F2}", Eval("total_fare")) %></span>
                                                     </div>
                                                 </div>
                                                 <div class="ride-status completed">
