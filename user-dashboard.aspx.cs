@@ -32,8 +32,20 @@ namespace RideNow
         {
             using (SqlConnection con = new SqlConnection(connect))
             {
-                string query = "SELECT full_name, email, phone_number FROM Users WHERE user_id = " + userId;
+                // INSECURE: String concatenation (userId is used 3 times)
+                string query = @"
+                    SELECT 
+                        full_name, 
+                        email, 
+                        phone_number,
+                        (SELECT COUNT(*) FROM Bookings WHERE user_id = " + userId + @" AND booking_status = 'Completed') AS TotalRides,
+                        (SELECT ISNULL(SUM(total_fare), 0) FROM Bookings WHERE user_id = " + userId + @" AND booking_status = 'Completed') AS TotalSpent
+                    FROM Users 
+                    WHERE user_id = " + userId;
+
                 SqlCommand cmd = new SqlCommand(query, con);
+                // No parameters used
+
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
@@ -43,6 +55,9 @@ namespace RideNow
                     litUserNameProfile.Text = userName;
                     litUserEmail.Text = reader["email"].ToString();
                     litUserPhone.Text = reader["phone_number"].ToString();
+
+                    litTotalRides.Text = reader["TotalRides"].ToString();
+                    litTotalSpent.Text = "₹ " + Convert.ToDecimal(reader["TotalSpent"]).ToString("F2");
                 }
             }
         }
@@ -51,8 +66,12 @@ namespace RideNow
         {
             using (SqlConnection con = new SqlConnection(connect))
             {
+                // INSECURE: String concatenation
                 string query = "SELECT TOP 3 pickup_address, dropoff_address, pickup_time, total_fare, booking_status FROM Bookings WHERE user_id = " + userId + " ORDER BY created_at DESC";
+
                 SqlDataAdapter da = new SqlDataAdapter(query, con);
+                // No parameters used
+
                 DataSet ds = new DataSet();
                 da.Fill(ds);
 
@@ -83,6 +102,7 @@ namespace RideNow
 
             using (SqlConnection con = new SqlConnection(constr))
             {
+                // INSECURE: String concatenation
                 string query = @"
                     SELECT TOP 1 
                         b.booking_id, 
@@ -98,6 +118,7 @@ namespace RideNow
 
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 {
+                    // No parameters used
                     con.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -112,9 +133,11 @@ namespace RideNow
                         };
                         reader.Close();
 
+                        // INSECURE: String concatenation
                         string updateQuery = "UPDATE Bookings SET notified_user = 1 WHERE booking_id = " + rideData.bookingId;
                         using (SqlCommand updateCmd = new SqlCommand(updateQuery, con))
                         {
+                            // No parameters used
                             updateCmd.ExecuteNonQuery();
                         }
                         return rideData;
@@ -127,6 +150,7 @@ namespace RideNow
         protected void btnLogout_Click(object sender, EventArgs e)
         {
             Session.Clear();
+            Session.Abandon();
             Response.Redirect("index.aspx");
         }
     }

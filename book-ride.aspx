@@ -66,7 +66,6 @@
                                     <h2 class="card-title"><i class="fa fa-car"></i>Ride Booking <a href="../user-dashboard.aspx" style="position: absolute; font-size: 16px; right: 50px;"><i class="fa-solid fa-angle-left" style="font-size: 16px;"></i>BACK</a></h2>
                                 </div>
 
-                                <!-- ASP.NET Form Starts Here -->
                                 <div id="map" style="width:100%; height:300px; border-radius:10px; margin-bottom:15px;"></div>
 
                                 <div class="booking-form">
@@ -162,15 +161,13 @@
                                         <asp:Button ID="btnBookRide" runat="server" OnClick="btnBookRide_Click" Text="Book Ride" CssClass="btn btn-primary btn-lg" />
                                     </div>
                                 </div>
-                                <!-- ASP.NET Form Ends Here -->
-                            </div>
+                                </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Other Sections & Footer -->
         <script>
             $(document).ready(function () {
                 // Add this inside your existing $(document).ready function
@@ -190,12 +187,13 @@
         <script src="js/vendor/jquery-2.2.4.min.js"></script>
         <script src="js/vendor/bootstrap.min.js"></script>
         <script src="js/main.js"></script>
+
         <script>
             let map, directionsService, directionsRenderer, autocompletePickup, autocompleteDrop;
 
             function initMap() {
-                const defaultCenter = { lat: 19.0760, lng: 72.8777 }; // change if you want a different center
-                map = new google.maps.Map(document.getElementById("map"), { center: defaultCenter, zoom: 12 });
+                const defaultCenter = { lat: 22.3094, lng: 72.1362 }; // Centered on Gujarat
+                map = new google.maps.Map(document.getElementById("map"), { center: defaultCenter, zoom: 7 });
                 directionsService = new google.maps.DirectionsService();
                 directionsRenderer = new google.maps.DirectionsRenderer({ map: map });
 
@@ -204,14 +202,83 @@
                 const distanceBox = document.getElementById("<%= txtDistance.ClientID %>");
                 const fareBox = document.getElementById("<%= txtFare.ClientID %>");
 
-                autocompletePickup = new google.maps.places.Autocomplete(pickup);
-                autocompleteDrop = new google.maps.places.Autocomplete(drop);
+                // 1. DEFINE GUJARAT BOUNDS (to bias the search)
+                const gujaratBounds = new google.maps.LatLngBounds(
+                    new google.maps.LatLng(20.09, 68.16), // Southwest corner
+                    new google.maps.LatLng(24.71, 74.46)  // Northeast corner
+                );
 
+                const autocompleteOptions = {
+                    bounds: gujaratBounds,
+                    componentRestrictions: { country: 'IN' },
+                    strictBounds: false // 'false' means it biases, but doesn't strictly restrict
+                };
+
+                autocompletePickup = new google.maps.places.Autocomplete(pickup, autocompleteOptions);
+                autocompleteDrop = new google.maps.places.Autocomplete(drop, autocompleteOptions);
+
+                // 2. HELPER FUNCTION TO VALIDATE THE STATE
+                function isPlaceInGujarat(place) {
+                    if (!place || !place.address_components) {
+                        return false;
+                    }
+
+                    for (const component of place.address_components) {
+                        // 'administrative_area_level_1' is the type for "State" in India
+                        if (component.types.includes('administrative_area_level_1')) {
+                            if (component.long_name === 'Gujarat') {
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
+                }
+
+                // 3. VALIDATE PICKUP LOCATION
+                autocompletePickup.addListener('place_changed', () => {
+                    const place = autocompletePickup.getPlace();
+
+                    if (!place.geometry) {
+                        console.log("User did not select a valid place.");
+                        return;
+                    }
+
+                    if (isPlaceInGujarat(place)) {
+                        calculateRoute(); // Location is valid, proceed
+                    } else {
+                        // Location is NOT in Gujarat
+                        alert("We're sorry, we only accept pickup locations within Gujarat.");
+                        pickup.value = ""; // Clear the invalid entry
+                        calculateRoute(); // This will clear the map route
+                    }
+                });
+
+                // 4. VALIDATE DROPOFF LOCATION
+                autocompleteDrop.addListener('place_changed', () => {
+                    const place = autocompleteDrop.getPlace();
+
+                    if (!place.geometry) {
+                        console.log("User did not select a valid place.");
+                        return;
+                    }
+
+                    if (isPlaceInGujarat(place)) {
+                        calculateRoute(); // Location is valid, proceed
+                    } else {
+                        // Location is NOT in Gujarat
+                        alert("We're sorry, we only accept drop-off locations within Gujarat.");
+                        drop.value = ""; // Clear the invalid entry
+                        calculateRoute(); // This will clear the map route
+                    }
+                });
+
+
+                // 5. CALCULATE ROUTE (This is the updated function)
                 function calculateRoute() {
                     if (!pickup.value || !drop.value) {
-                        directionsRenderer.set('directions', null);
+                        directionsRenderer.set('directions', null); // Clear map
                         distanceBox.value = "";
-                        fareBox.value = "";
+                        fareBox.value = ""; // Clear fare
                         return;
                     }
                     directionsService.route({
@@ -223,29 +290,35 @@
                             directionsRenderer.setDirections(result);
                             const leg = result.routes[0].legs[0];
                             const distanceKm = leg.distance.value / 1000;
+                            
+                            // Set the distance
                             distanceBox.value = distanceKm.toFixed(2);
-                            fareBox.value = (distanceKm * 15).toFixed(2); // ₹15/km
+                            
+                            // --- START: NEW FIX ---
+                            // Calculate fare directly right here
+                            const ratePerKm = 15; // Same as your other script
+                            if (!isNaN(distanceKm) && distanceKm > 0) {
+                                const totalFare = distanceKm * ratePerKm;
+                                fareBox.value = totalFare.toFixed(2); // Use fareBox element
+                            } else {
+                                fareBox.value = '0.00';
+                            }
+                            // --- END: NEW FIX ---
+                            
                         } else {
                             console.warn('Directions error:', status);
                             directionsRenderer.set('directions', null);
                             distanceBox.value = "";
-                            fareBox.value = "";
+                            fareBox.value = ""; // Clear fare on error
                         }
                     });
                 }
-
-                autocompletePickup.addListener('place_changed', calculateRoute);
-                autocompleteDrop.addListener('place_changed', calculateRoute);
             }
         </script>
 
-
-        <!-- Load Google Maps JS (paste this at the bottom of book-ride.aspx before </body>) -->
         <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBs_iBag4aCm0_5WlM6SpWwfERXSoKYueY&libraries=places&callback=initMap">
         </script>
-
-    </body>
+        </body>
     </html>
 </asp:Content>
-

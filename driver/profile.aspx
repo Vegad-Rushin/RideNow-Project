@@ -121,28 +121,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- Account Status Card -->
-                                    <div class="dashboard-card account-status-card">
-                                        <div class="card-header">
-                                            <h3><i class="fa fa-shield"></i>Account Status</h3>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="status-items">
-                                                <div class="status-item verified">
-                                                    <i class="fa fa-check-circle"></i><span>Identity Verified</span>
-                                                </div>
-                                                <div class="status-item verified">
-                                                    <i class="fa fa-check-circle"></i><span>Background Check</span>
-                                                </div>
-                                                <div class="status-item verified">
-                                                    <i class="fa fa-check-circle"></i><span>Vehicle Inspection</span>
-                                                </div>
-                                                <div class="status-item pending">
-                                                    <i class="fa fa-clock-o"></i><span>Insurance Review</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                              
                                 </div>
                                 <div class="col-lg-8">
                                     <!-- Profile Information Form -->
@@ -190,29 +169,10 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="vehicle-details">
-                                                <%--<div class="vehicle-image">
-                                                    <div class="vehicle-placeholder">
-                                                        <i class="fa fa-car"></i>
-                                                        <p>
-                                                            Vehicle Photo</p>
-                                                    </div>
-                                                    <button class="btn btn-outline btn-sm">
-                                                        <i class="fa fa-camera"></i>Upload Photo
-                                                    </button>
-                                                </div>--%>
+                                                
                                                 <div class="vehicle-form">
                                                     <div class="form-row">
-                                                        <%--<div class="form-group">
-                                                            <label>
-                                                            Make</label>
-                                                            <select class="form-control">
-                                                                <option>Toyota</option>
-                                                                <option>Honda</option>
-                                                                <option>Ford</option>
-                                                                <option>Chevrolet</option>
-                                                                <option>Nissan</option>
-                                                            </select>
-                                                        </div>--%>
+                                                        
                                                         <div class="form-group">
                                                             <label>Maker & Model</label>
                                                             <asp:TextBox ID="txtMakeModel" runat="server" CssClass="form-control" required="true"></asp:TextBox>
@@ -329,150 +289,7 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <!-- Ratings & Feedback -->
-                                    <div class="dashboard-card ratings-card">
-                                        <div class="card-header">
-                                            <h3><i class="fa fa-star"></i>Ratings & Feedback</h3>
-                                            <div class="rating-summary">
-                                                <span class="rating-number">4.9</span>
-                                                <div class="rating-stars">
-                                                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-                                                </div>
-                                                <span class="rating-count">(1,247 reviews)</span>
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="rating-breakdown">
-                                                <div class="rating-bar">
-                                                    <span class="rating-label">5 stars</span>
-                                                    <div class="rating-progress">
-                                                        <div class="progress-fill" style="width: 85%">
-                                                        </div>
-                                                    </div>
-                                                    <span class="rating-percentage">85%</span>
-                                                </div>
-                                                <div class="rating-bar">
-                                                    <span class="rating-label">4 stars</span>
-                                                    <div class="rating-progress">
-                                                        <div class="progress-fill" style="width: 12%">
-                                                        </div>
-                                                    </div>
-                                                    <span class="rating-percentage">12%</span>
-                                                </div>
-                                                <div class="rating-bar">
-                                                    <span class="rating-label">3 stars</span>
-                                                    <div class="rating-progress">
-                                                        <div class="progress-fill" style="width: 2%">
-                                                        </div>
-                                                    </div>
-                                                    <span class="rating-percentage">2%</span>
-                                                </div>
-                                                <div class="rating-bar">
-                                                    <span class="rating-label">2 stars</span>
-                                                    <div class="rating-progress">
-                                                        <div class="progress-fill" style="width: 1%">
-                                                        </div>
-                                                    </div>
-                                                    <span class="rating-percentage">1%</span>
-                                                </div>
-                                                <div class="rating-bar">
-                                                    <span class="rating-label">1 star</span>
-                                                    <div class="rating-progress">
-                                                        <div class="progress-fill" style="width: 0%">
-                                                        </div>
-                                                    </div>
-                                                    <span class="rating-percentage">0%</span>
-                                                </div>
-                                            </div>
-                                            <div class="recent-reviews">
-                                                <h5>Recent Reviews</h5>
-                                                <div class="review-item">
-                                                    <div class="review-header">
-                                                        <div class="reviewer-info">
-                                                            <span class="reviewer-name">Sarah M.</span>
-                                                            <div class="review-stars">
-                                                                <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-                                                            </div>
-                                                        </div>
-                                                        <span class="review-date">2 days ago</span>
-                                                    </div>
-                                                    <p class="review-text">
-                                                        "Excellent driver! Very professional and the car was spotless. Would definitely recommend."</p>
-                                                </div>
-                                                <div class="review-item">
-                                                    <div class="review-header">
-                                                        <div class="reviewer-info">
-                                                            <span class="reviewer-name">John D.</span>
-                                                            <div class="review-stars">
-                                                                <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-                                                            </div>
-                                                        </div>
-                                                        <span class="review-date">1 week ago</span>
-                                                    </div>
-                                                    <p class="review-text">
-                                                        "Great service and very punctual. The ride was smooth and comfortable."</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Account Settings -->
-                                    <div class="dashboard-card settings-card">
-                                        <div class="card-header">
-                                            <h3><i class="fa fa-cog"></i>Account Settings</h3>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="settings-sections">
-                                                <div class="settings-section">
-                                                    <h5>Notifications</h5>
-                                                    <div class="setting-item">
-                                                        <div class="setting-info">
-                                                            <span class="setting-label">Ride Requests</span> <span class="setting-desc">Get notified of new ride requests</span>
-                                                        </div>
-                                                        <label class="switch">
-                                                        <input type="checkbox" checked> <span class="slider"></span>
-                                                        </label>
-                                                        &nbsp;</div>
-                                                    <div class="setting-item">
-                                                        <div class="setting-info">
-                                                            <span class="setting-label">Earnings Updates</span> <span class="setting-desc">Daily earnings summary</span>
-                                                        </div>
-                                                        <label class="switch">
-                                                        <input type="checkbox" checked> <span class="slider"></span>
-                                                        </label>
-                                                        &nbsp;</div>
-                                                    <div class="setting-item">
-                                                        <div class="setting-info">
-                                                            <span class="setting-label">Promotional Offers</span> <span class="setting-desc">Special deals and bonuses</span>
-                                                        </div>
-                                                        <label class="switch">
-                                                        <input type="checkbox"> <span class="slider"></span>
-                                                        </label>
-                                                        &nbsp;</div>
-                                                </div>
-                                                <div class="settings-section">
-                                                    <h5>Privacy & Security</h5>
-                                                    <div class="setting-item">
-                                                        <div class="setting-info">
-                                                            <span class="setting-label">Two-Factor Authentication</span> <span class="setting-desc">Add extra security to your account</span>
-                                                        </div>
-                                                        <button class="btn btn-outline btn-sm">
-                                                            Enable
-                                                        </button>
-                                                    </div>
-                                                    <div class="setting-item">
-                                                        <div class="setting-info">
-                                                            <span class="setting-label">Change Password</span> <span class="setting-desc">Update your account password</span>
-                                                        </div>
-                                                        <button class="btn btn-outline btn-sm">
-                                                            Change
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>

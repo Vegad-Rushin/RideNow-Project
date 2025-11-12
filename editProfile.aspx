@@ -637,22 +637,6 @@
                     </style>
                 </head>
                 <body>
-                    <!-- Navigation -->
-                    <%--<nav class="navbar">
-                        <div class="nav-container">
-                            <a href="#" class="nav-logo">RideNow</a>
-                            <ul class="nav-menu" id="navMenu">
-                                <li><a href="index.aspx" class="nav-link">HOME</a></li>
-                                <li><a href="about.aspx" class="nav-link">ABOUT</a></li>
-                                <li><a href="contact.aspx" class="nav-link">CONTACT</a></li>
-                                <li><a href="user-dashboard.aspx" class="nav-link dashboard">DASHBOARD</a></li>
-                                <li><a href="logout.aspx" class="nav-link">LOGOUT</a></li>
-                            </ul>
-                            <div class="hamburger" id="hamburger">
-                                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-                            </div>
-                        </div>
-                    </nav>--%>
 
                     <!-- Main Content -->
                     <main class="main-content">
@@ -699,75 +683,20 @@
                                         <div class="form-group">
                                             <label class="form-label required" for="firstName">
                                             First Name</label>
-                                            <input type="text" id="firstName" name="firstName" class="form-input" placeholder="Enter your first name"  required>
+                                            <input type="text" id="firstName" name="firstName" class="form-input" placeholder="Enter your first name"  required runat="server">
                                         </div>
-                                       <%-- <div class="form-group">
-                                            <label class="form-label required" for="lastName">
-                                            Last Name</label>
-                                            <input type="text" id="lastName" name="lastName" class="form-input" placeholder="Enter your last name" value="Patel" required>
-                                        </div>--%>
+                                       
                                         <div class="form-group">
                                             <label class="form-label required" for="email">
                                             Email Address</label>
-                                            <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email"  required>
+                                            <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email"  required runat="server">
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label required" for="phone">
                                             Phone Number</label>
-                                            <input type="tel" id="phone" name="phone" class="form-input" placeholder="Enter your phone number"  required>
+                                            <input type="tel" id="phone" name="phone" class="form-input" placeholder="Enter your phone number"  required runat="server">
                                         </div>
-                                        <%--<div class="form-group">
-                        <label class="form-label" for="address">
-                        Address</label>
-                        <input type="text" id="address" name="address" class="form-input" placeholder="Enter your address" value="123 Main Street">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="city">
-                        City</label>
-                        <input type="text" id="city" name="city" class="form-input" placeholder="Enter your city" value="New York">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="state">
-                        State</label>
-                        <select id="state" name="state" class="form-select">
-                            <option value="">Select State</option>
-                            <option value="NY" selected>New York</option>
-                            <option value="CA">California</option>
-                            <option value="TX">Texas</option>
-                            <option value="FL">Florida</option>
-                            <option value="IL">Illinois</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="zipCode">
-                        ZIP Code</label>
-                        <input type="text" id="zipCode" name="zipCode" class="form-input" placeholder="Enter ZIP code" value="10001">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="memberLevel">
-                        Member Level</label>
-                        <select id="memberLevel" name="memberLevel" class="form-select">
-                            <option value="bronze">Bronze</option>
-                            <option value="silver">Silver</option>
-                            <option value="gold" selected>Gold</option>
-                            <option value="platinum">Platinum</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="preferredLanguage">
-                        Preferred Language</label>
-                        <select id="preferredLanguage" name="preferredLanguage" class="form-select">
-                            <option value="en" selected>English</option>
-                            <option value="es">Spanish</option>
-                            <option value="fr">French</option>
-                            <option value="de">German</option>
-                        </select>
-                    </div>
-                    <div class="form-group full-width">
-                        <label class="form-label" for="bio">
-                        Bio</label>
-                        <textarea id="bio" name="bio" class="form-textarea" placeholder="Tell us about yourself...">Frequent traveler who loves exploring new cities with RideNow. Always looking for the best routes and reliable rides.</textarea>
-                    </div> --%>
+                                        
                                     </div>
 
                                     <!-- Contact Information Display -->
@@ -779,7 +708,7 @@
                                             </div>
                                             <div class="contact-details">
                                                 <h4>Phone Number</h4>
-                                                <p id="displayPhone">
+                                                <p id="displayPhone" runat="server">
                                                     +1 555 000 0000
                                                 </p>
                                             </div>
@@ -790,21 +719,12 @@
                                             </div>
                                             <div class="contact-details">
                                                 <h4>Email Address</h4>
-                                                <p id="displayEmail">
+                                                <p id="displayEmail" runat="server">
                                                     jenil@example.com
                                                 </p>
                                             </div>
                                         </div>
-                                        <%--<div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Location</h4>
-                            <p id="displayLocation">
-                                New York, NY</p>
-                        </div>
-                    </div>--%>
+                                       
                                     </div>
 
                                     <!-- Action Buttons -->

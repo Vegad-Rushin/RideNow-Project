@@ -78,10 +78,11 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="stat-card scroll-animate">
                             <div class="stat-icon">
-                                <i class="fa fa-dollar"></i>
+                                <i class="fa fa-inr"></i>
                             </div>
                             <div class="stat-content">
-                                <h3>$245</h3>
+                                <h3>
+                                    <asp:Literal ID="litTotalEarnings2" runat="server">0.00</asp:Literal></h3>
                                 <p>
                                     Today's Earnings
                                 </p>
@@ -94,7 +95,8 @@
                                 <i class="fa fa-car"></i>
                             </div>
                             <div class="stat-content">
-                                <h3>12</h3>
+                                <h3>
+                                    <asp:Literal ID="litTotalCompletedRides" runat="server">0</asp:Literal></h3>
                                 <p>
                                     Rides Completed
                                 </p>
@@ -247,7 +249,8 @@
                         </div>
                     </div>
                     <div class="col-lg-8">
-                        <asp:Literal ID="litMessage" runat="server"></asp:Literal> <%-- Add this line --%>
+                        <asp:Literal ID="litMessage" runat="server"></asp:Literal>
+                        <%-- Add this line --%>
                         <!-- Ride Requests Card -->
                         <div class="dashboard-card ride-requests-card">
                             <div class="card-header">
@@ -256,18 +259,21 @@
                             </div>
                             <div class="card-body">
                                 <div class="requests-list">
-                                    <asp:Repeater ID="rptRideRequests" runat="server">
+                                    <asp:Repeater ID="rptRideRequests" runat="server" OnItemDataBound="rptRideRequests_ItemDataBound">
                                         <ItemTemplate>
                                             <div class="request-item">
+
                                                 <div class="request-icon">
                                                     <i class="fa fa-user"></i>
                                                 </div>
                                                 <div class="request-details">
                                                     <div class="request-route">
-                                                        <span class="from"><%# Eval("pickup_address") %></span> <i class="fa fa-arrow-right"></i><span class="to"><%# Eval("dropoff_address") %></span>
+                                                        <span class="from"><%# Eval("pickup_address") %></span>
+                                                        <i class="fa fa-arrow-right"></i>
+                                                        <span class="to"><%# Eval("dropoff_address") %></span>
                                                     </div>
                                                     <div class="request-meta">
-                                                        <span class="distance">~ <%# (new Random(Eval("booking_id").GetHashCode())).Next(2, 15) %> miles</span>
+                                                        <span class="distance">~ <%# Eval("distance_km") %> KM</span>
                                                         <span class="rider-name">by <%# Eval("full_name") %></span>
                                                     </div>
                                                 </div>
@@ -277,21 +283,32 @@
                                                         OnCommand="HandleRideRequest"
                                                         CommandName="Accept"
                                                         CommandArgument='<%# Eval("booking_id") %>'>
-                                                        <i class="fa fa-check"></i> Accept
-                                                    </asp:LinkButton>
+                    <i class="fa fa-check"></i> Accept
+                </asp:LinkButton>
 
                                                     <asp:LinkButton ID="btnDecline" runat="server"
                                                         CssClass="btn btn-outline btn-sm"
                                                         OnCommand="HandleRideRequest"
                                                         CommandName="Decline"
                                                         CommandArgument='<%# Eval("booking_id") %>'>
-                                                        <i class="fa fa-times"></i> Decline
-                                                    </asp:LinkButton>
+                    <i class="fa fa-times"></i> Decline
+                </asp:LinkButton>
+
+                                                    <%-- This button will be enabled from C# --%>
+                                                    <asp:LinkButton ID="btnComplete" runat="server"
+                                                        CssClass="btn btn-primary btn-sm"
+                                                        OnCommand="HandleRideRequest"
+                                                        CommandName="Complete"
+                                                        Visible="false"
+                                                        CommandArgument='<%# Eval("booking_id") %>'>
+                    <i class="fa fa-flag-checkered"></i> Mark as Completed
+                </asp:LinkButton>
                                                 </div>
 
                                             </div>
                                         </ItemTemplate>
                                     </asp:Repeater>
+
                                     <asp:Literal ID="litNoRequests" runat="server" Visible="false"></asp:Literal>
                                 </div>
                             </div>
@@ -316,7 +333,10 @@
                             <div class="card-body">
                                 <div class="earnings-summary">
                                     <div class="earnings-amount">
-                                        <span class="currency">$</span> <span class="amount" id="earningsAmount">245.50</span>
+                                        <span class="currency">&#8377;</span>
+                                        <span class="amount" id="earningsAmount">
+                                            <asp:Literal ID="litTotalEarnings" runat="server">0.00</asp:Literal>
+                                        </span>
                                     </div>
                                     <div class="earnings-breakdown">
                                         <div class="breakdown-item">

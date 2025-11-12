@@ -22,6 +22,12 @@
                     width:100%;
                 }
 
+                .dashboard-stats {
+                    display:flex;
+                    justify-content:center;
+                    align-items:center;
+                }
+
             </style>
 
         </head>
@@ -53,7 +59,7 @@
                                 <p class="welcome-subtitle">
                                     Ready for your next adventure? Let's get you where you need to go.</p>
                                 <div class="quick-actions">
-                                    <a href="book-ride.aspx" class="btn btn-primary btn-lg"><i class="fa fa-car"></i>Book a Ride </a><a href="#" class="btn btn-outline btn-lg"><i class="fa fa-map-marker"></i> Set Destination </a>
+                                    <a href="book-ride.aspx" class="btn btn-primary btn-lg"><i class="fa fa-car"></i>Book a Ride </a>
                                 </div>
                             </div>
                         </div>
@@ -78,32 +84,33 @@
             <!-- Stats Section -->
             <section class="dashboard-stats">
                 <div class="container">
-                    <div class="row">
+                    <div class="row justify-content-center">
                         <div class="col-lg-3 col-md-6">
                             <div class="stat-card scroll-animate">
                                 <div class="stat-icon">
                                     <i class="fa fa-car"></i>
                                 </div>
                                 <div class="stat-content">
-                                    <h3>24</h3>
+                                    <h3><asp:Literal ID="litTotalRides" runat="server">0</asp:Literal></h3>
                                     <p>
-                                        Total Rides</p>
+                                        Total Rides
+                                    </p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6">
                             <div class="stat-card scroll-animate delay-1">
                                 <div class="stat-icon">
-                                    <i class="fa fa-dollar"></i>
+                                    <i class="fa fa-inr"></i>
                                 </div>
                                 <div class="stat-content">
-                                    <h3>$156</h3>
+                                    <h3><asp:Literal ID="litTotalSpent" runat="server">0.00</asp:Literal></h3>
                                     <p>
                                         Total Spent</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6">
+                        <%--<div class="col-lg-3 col-md-6">
                             <div class="stat-card scroll-animate delay-2">
                                 <div class="stat-icon">
                                     <i class="fa fa-star"></i>
@@ -126,7 +133,7 @@
                                         Member Level</p>
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
                     </div>
                 </div>
             </section>
@@ -177,12 +184,6 @@
                                         <a href="book-ride.aspx" class="action-btn">
                                             <i class="fa fa-car"></i><span>Book Ride</span>
                                         </a>
-                                        <button class="action-btn">
-                                            <i class="fa fa-history"></i><span>Ride History</span>
-                                        </button>
-                                        <button class="action-btn">
-                                            <i class="fa fa-credit-card"></i><span>Payment</span>
-                                        </button>
                                         <a href="editProfile.aspx" class="action-btn">
                                             <i class="fa fa-cog"></i><span>Settings</span>
                                         </a>

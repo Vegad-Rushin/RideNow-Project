@@ -33,6 +33,24 @@ namespace RideNow.driver
         protected global::System.Web.UI.WebControls.Literal litDriverName;
 
         /// <summary>
+        /// litTotalEarnings2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litTotalEarnings2;
+
+        /// <summary>
+        /// litTotalCompletedRides control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litTotalCompletedRides;
+
+        /// <summary>
         /// litProfileName control.
         /// </summary>
         /// <remarks>
@@ -94,5 +112,14 @@ namespace RideNow.driver
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litNoRequests;
+
+        /// <summary>
+        /// litTotalEarnings control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litTotalEarnings;
     }
 }
