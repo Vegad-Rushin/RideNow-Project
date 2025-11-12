@@ -68,19 +68,16 @@ namespace RideNow.driver
 
             if (e.CommandName == "Accept")
             {
-                // INSECURE: String concatenation
                 query = "UPDATE Bookings SET booking_status = 'Accepted', driver_id = " + driverId + " WHERE booking_id = " + bookingId + " AND booking_status = 'Pending'";
                 Session["DriverMessage"] = "<div class='alert alert-success'>Ride accepted! The user has been notified.</div>";
             }
             else if (e.CommandName == "Decline")
             {
-                // INSECURE: String concatenation
                 query = "UPDATE Bookings SET booking_status = 'Pending', driver_id = NULL WHERE booking_id = " + bookingId + " AND driver_id = " + driverId;
                 Session["DriverMessage"] = "<div class='alert alert-info'>Ride has been declined.</div>";
             }
             else if (e.CommandName == "Complete")
             {
-                // INSECURE: String concatenation
                 query = "UPDATE Bookings SET booking_status = 'Completed' WHERE booking_id = " + bookingId + " AND driver_id = " + driverId;
                 Session["DriverMessage"] = "<div class='alert alert-success'>Ride completed! Your earnings have been updated.</div>";
             }
@@ -91,7 +88,6 @@ namespace RideNow.driver
                 {
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
-                        // No parameters used
                         con.Open();
                         cmd.ExecuteNonQuery();
                     }
@@ -105,7 +101,6 @@ namespace RideNow.driver
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                // INSECURE: String concatenation
                 string query = @"
                     SELECT 
                         b.booking_id, 
@@ -121,7 +116,6 @@ namespace RideNow.driver
                     ORDER BY b.created_at DESC";
 
                 SqlDataAdapter da = new SqlDataAdapter(query, con);
-                // No parameters used
 
                 DataTable dt = new DataTable();
                 da.Fill(dt);
@@ -146,7 +140,6 @@ namespace RideNow.driver
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                // INSECURE: String concatenation (driverId is used 3 times)
                 string query = @"
                     SELECT 
                         (SELECT COUNT(*) FROM Bookings WHERE driver_id = " + driverId + @" AND booking_status = 'Completed') AS TotalRides,
@@ -156,7 +149,6 @@ namespace RideNow.driver
 
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 {
-                    // No parameters used
                     con.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
                     if (reader.Read())
@@ -164,7 +156,6 @@ namespace RideNow.driver
                         litTotalCompletedRides.Text = reader["TotalRides"].ToString();
                         litTotalEarnings.Text = Convert.ToDecimal(reader["TotalEarnings"]).ToString("F2");
                         litTotalEarnings2.Text = Convert.ToDecimal(reader["TotalEarnings"]).ToString("F2");
-                        //litTodaysEarnings.Text = "₹ " + Convert.ToDecimal(reader["TodaysEarnings"]).ToString("F2");
                     }
                 }
             }
@@ -174,11 +165,9 @@ namespace RideNow.driver
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                // INSECURE: String concatenation
                 string query = "SELECT U.full_name, V.make_model, V.year, V.license_plate FROM dbo.Users AS U LEFT JOIN dbo.Vehicles AS V ON U.user_id = V.driver_id WHERE U.user_id = " + userId;
 
                 SqlCommand cmd = new SqlCommand(query, con);
-                // No parameters used
 
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();

@@ -32,7 +32,7 @@ namespace RideNow
         {
             using (SqlConnection con = new SqlConnection(connect))
             {
-                // INSECURE: String concatenation (userId is used 3 times)
+                
                 string query = @"
                     SELECT 
                         full_name, 
@@ -44,7 +44,7 @@ namespace RideNow
                     WHERE user_id = " + userId;
 
                 SqlCommand cmd = new SqlCommand(query, con);
-                // No parameters used
+                
 
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -66,11 +66,11 @@ namespace RideNow
         {
             using (SqlConnection con = new SqlConnection(connect))
             {
-                // INSECURE: String concatenation
+                
                 string query = "SELECT TOP 3 pickup_address, dropoff_address, pickup_time, total_fare, booking_status FROM Bookings WHERE user_id = " + userId + " ORDER BY created_at DESC";
 
                 SqlDataAdapter da = new SqlDataAdapter(query, con);
-                // No parameters used
+                
 
                 DataSet ds = new DataSet();
                 da.Fill(ds);
@@ -102,7 +102,7 @@ namespace RideNow
 
             using (SqlConnection con = new SqlConnection(constr))
             {
-                // INSECURE: String concatenation
+                
                 string query = @"
                     SELECT TOP 1 
                         b.booking_id, 
@@ -118,7 +118,7 @@ namespace RideNow
 
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 {
-                    // No parameters used
+                    
                     con.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -133,11 +133,11 @@ namespace RideNow
                         };
                         reader.Close();
 
-                        // INSECURE: String concatenation
+                        
                         string updateQuery = "UPDATE Bookings SET notified_user = 1 WHERE booking_id = " + rideData.bookingId;
                         using (SqlCommand updateCmd = new SqlCommand(updateQuery, con))
                         {
-                            // No parameters used
+                            
                             updateCmd.ExecuteNonQuery();
                         }
                         return rideData;
